@@ -1,14 +1,14 @@
-base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S11_S12")
-dir.create(figures_dir)
 
 library(tidyverse)
 library(lme4)
 library(arrow)
 library(fs)
 
+base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
+data_dir <- path(base_dir, "data")
+outputs_dir <- path(base_dir, "outputs")
+figures_dir <- path(base_dir, "figures/figure_S11_S12")
+dir_create(figures_dir)
 
 #########################################################
 ## load data
