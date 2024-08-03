@@ -3,11 +3,11 @@ library(lme4)
 library(arrow)
 library(fs)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
+base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
 outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S2")
-dir_create(figures_dir)
+figures_dir <- path(base_dir, "figures", "figure_S2")
+dir.create(figures_dir)
 
 
 #########################################################
@@ -34,8 +34,8 @@ by_species <- trends |>
   mutate(wt_trend = tot_wt_ppy / tot_abd) |>
   mutate(wt_trend_cat = cut(wt_trend, breaks = seq(-10, 4, by = 1)))
 
-plot_loc <- path(figures_dir, paste0("species_scatter_", species_plot_name, ".png"))
-png(plot_loc, width = 8, height = 8, units = "cm", pointsize = 9, res = 600)
+plot_loc <- path(figures_dir, paste0("figure_S2_boxplot.tif"))
+tiff(plot_loc, width = 8, height = 8, units = "cm", pointsize = 9, res = 600)
 par(mar = c(5, 5, 3, 3))
 
     boxplot(prop_dec ~ wt_trend_cat, data = by_species, 

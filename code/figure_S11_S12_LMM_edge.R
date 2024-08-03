@@ -4,7 +4,7 @@ library(lme4)
 library(arrow)
 library(fs)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
+base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
 outputs_dir <- path(base_dir, "outputs")
 figures_dir <- path(base_dir, "figures/figure_S11_S12")
@@ -109,6 +109,9 @@ plot_loc <- path(figures_dir, paste0("fig11_mixed-model_slope-histogram_", mod_t
 ggsave(plot_loc, width = 14, height = 10, units = "cm")
 
 
+plot_loc <- path(figures_dir, paste0("fig11_mixed-model_slope-histogram_", mod_tag, ".tif"))
+ggsave(plot_loc, width = 14, height = 10, units = "cm")
+
 
 #########################################################
 ## trend vs. distance to edge relationships from random effects ----
@@ -130,8 +133,8 @@ biome_names_tidy <- c("Arctic tundra", "Aridland", "Forest",
       "Grassland", "Habitat generalists", "Wetland & Coast")
 
 
-plot_loc <- path(figures_dir, paste0("fig12_mixed-model_slopes_", mod_tag, ".png"))
-png(plot_loc, width = 14, height = 10, units = "cm", pointsize = 9, res = 600)
+plot_loc <- path(figures_dir, paste0("fig12_mixed-model_slopes_", mod_tag, ".tif"))
+tiff(plot_loc, width = 14, height = 10, units = "cm", pointsize = 9, res = 600)
 par(mfrow=c(2, 3), mar = c(0.5, 0.5, 0.5, 0.5), oma = c(5,5,2,0))
 biomes <- names(table(spec_coef$breeding_biome))
 

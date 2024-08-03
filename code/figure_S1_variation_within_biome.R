@@ -3,11 +3,11 @@ library(tidyverse)
 library(arrow)
 library(fs)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
+base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
 outputs_dir <- path(base_dir, "outputs")
 figures_dir <- path(base_dir, "figures/figure_S1")
-dir_create(figures_dir)
+dir.create(figures_dir)
 
 
 #########################################################
@@ -41,11 +41,10 @@ med_20 <- median(tr_sp_bcr$tr_range[tr_sp_bcr$at_least_20 == 1])
 #########################################################
 ## plot histogram of range of species trends within bcr 
 
-plot(log10(tr_sp_bcr$no_cells), tr_sp_bcr$tr_range)
 h1 <- hist(tr_sp_bcr$tr_range, breaks = 30, plot = FALSE)
 
-plot_loc <- path(figures_dir, "figure_S1_histogram_species_bcr_ranges.png")
-png(plot_loc, width = 12, height = 8, units = "cm", pointsize = 9, res = 600)
+plot_loc <- path(figures_dir, "figure_S1_histogram_species_bcr_ranges.tif")
+tiff(plot_loc, width = 12, height = 8, units = "cm", pointsize = 9, res = 600)
 par(mar = c(5, 5, 1, 1))
 
   hist(tr_sp_bcr$tr_range, breaks = h1$breaks, col = "grey70", 

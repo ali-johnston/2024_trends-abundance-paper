@@ -7,7 +7,7 @@ library(ggh4x)
 library(tidyr)
 
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
+base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
 outputs_dir <- path(base_dir, "outputs")
 figures_dir <- path(base_dir, "figures/figure_S3_S4")
