@@ -7,7 +7,7 @@ library(readr)
 library(tidyr)
 library(auk)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
+base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
 figures_dir <- path(base_dir, "figures", "figure_S8-S9")
 dir_create(figures_dir)
@@ -82,6 +82,9 @@ gs8a <- ggplot(power_trends) +
 ggsave(path(figures_dir, "figure_s8_power_trend-magnitude.png"), plot = gs8a,
        width = 10, height = 8, scale = 0.6)
 
+ggsave(path(figures_dir, "figure_s8_power_trend-magnitude.tiff"), plot = gs8a,
+       width = 10, height = 8, scale = 0.6)
+
 # power vs. abundance----
 binned_abd <- NULL
 for (s in unique(trends$species_code)) {
@@ -137,7 +140,7 @@ gs8b <- ggplot(power_abd) +
 ggsave(path(fig_dir, "s8b_power_abundance.png"), plot = gs8b,
        width = 10, height = 8, scale = 0.6)
 # stack figures
-ggsave(path(fig_dir, "s8_power_stacked.tiff"),
+ggsave(path(fig_dir, "s8_power_stacked.tif"),
        plot = gs8a / gs8b,
        width = 10, height = 16, scale = 0.6, dpi = 600)
 

@@ -14,7 +14,8 @@ dir_create(figures_dir)
 ## load data
 
 # # species lookup
-species <- read_csv("data/master_species_list_495.csv", na = "") |>
+species <- path(data_dir, "master_species_list_495.csv") |>
+  read_csv(na = "") |>
   select(species_code, breeding_biome)
 
 # trends estimates
@@ -50,8 +51,17 @@ dist_range_biome <- dist_range |>
 m3 <- lmer(abd_ppy_median ~ log_distance_to_edge_km + (1 + log_distance_to_edge_km|breeding_biome/species_code),
            weights = weight,
            data = trends)
+# boundary (singular) fit: see help('isSingular')
+# breeding biome has a very low variance on the slope. 
 
-mod <- m3
+# so refit removing this: 
+
+m4 <- lmer(abd_ppy_median ~ log_distance_to_edge_km + (1 + log_distance_to_edge_km|species_code),
+           weights = weight,
+           data = trends)
+
+
+mod <- m4
 mod_tag <- "edge"
 x_axis <- "log_distance_to_edge_km"
 
@@ -61,26 +71,22 @@ x_axis <- "log_distance_to_edge_km"
 re <- ranef(mod)
 fi <- fixef(mod)
 
-biome_coef_0 <- re[["breeding_biome"]] |>
-  rownames_to_column(var = "breeding_biome") |>
-  rename(biome_int = "(Intercept)",
-         biome_log_distance_to_edge_km = "log_distance_to_edge_km")
-
-spec_coef <- re[["species_code:breeding_biome"]] |>
-  rownames_to_column(var = "spec_biome") |>
+spec_coef <- re[["species_code"]] |>
+  rownames_to_column(var = "species_code") |>
   rename(spec_int = "(Intercept)",
          spec_log_distance_to_edge_km = "log_distance_to_edge_km") |>
-  separate_wider_delim(spec_biome, delim = ":",
-                       names = c("species_code", "breeding_biome")) |>
-  inner_join(biome_coef_0, by = join_by(breeding_biome)) |>
-  mutate(overall_int = fi[1] + spec_int + biome_int) |>
-  mutate(overall_log_distance_to_edge_km = fi[2] + spec_log_distance_to_edge_km + biome_log_distance_to_edge_km) |>
+  inner_join(species, by = join_by(species_code)) |>
+  mutate(overall_int = fi[1] + spec_int) |>
+  mutate(overall_log_distance_to_edge_km = fi[2] + spec_log_distance_to_edge_km) |>
   inner_join(dist_range, by = join_by(species_code, breeding_biome)) |>
   arrange(overall_log_distance_to_edge_km)
 
-biome_coef <- biome_coef_0 |>
-  mutate(overall_int = fi[1] + biome_int,
-         overall_log_distance_to_edge_km = fi[2] + biome_log_distance_to_edge_km) |>
+# no biome-specific coefficients, so averaging coefs for the species within each biome
+biome_coef <- spec_coef |>
+  dplyr::select(breeding_biome, overall_int, overall_log_distance_to_edge_km) |>
+  group_by(breeding_biome) |>
+  summarise(overall_int = mean(overall_int),
+         overall_log_distance_to_edge_km = mean(overall_log_distance_to_edge_km)) |>
   inner_join(dist_range_biome, by = join_by(breeding_biome)) |>
   arrange(overall_log_distance_to_edge_km)
 
