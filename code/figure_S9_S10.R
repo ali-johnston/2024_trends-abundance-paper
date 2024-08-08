@@ -9,7 +9,7 @@ library(auk)
 
 base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
-figures_dir <- path(base_dir, "figures", "figure_S8-S9")
+figures_dir <- path(base_dir, "figures", "figure_S9-S10")
 dir_create(figures_dir)
 
 tax <- select(auk::ebird_taxonomy, species_code, common_name)
@@ -79,10 +79,10 @@ gs8a <- ggplot(power_trends) +
   theme_light() +
   theme(legend.position = "bottom",
         plot.subtitle = element_text(size = rel(0.75)))
-ggsave(path(figures_dir, "figure_s8_power_trend-magnitude.png"), plot = gs8a,
+ggsave(path(figures_dir, "figure_s9_power_trend-magnitude.png"), plot = gs8a,
        width = 10, height = 8, scale = 0.6)
 
-ggsave(path(figures_dir, "figure_s8_power_trend-magnitude.tiff"), plot = gs8a,
+ggsave(path(figures_dir, "figure_s9_power_trend-magnitude.tiff"), plot = gs8a,
        width = 10, height = 8, scale = 0.6)
 
 # power vs. abundance----
@@ -137,10 +137,10 @@ gs8b <- ggplot(power_abd) +
   theme_light() +
   theme(legend.position = "bottom",
         plot.subtitle = element_text(size = rel(0.75)))
-ggsave(path(fig_dir, "s8b_power_abundance.png"), plot = gs8b,
+ggsave(path(fig_dir, "s9b_power_abundance.png"), plot = gs8b,
        width = 10, height = 8, scale = 0.6)
 # stack figures
-ggsave(path(fig_dir, "s8_power_stacked.tif"),
+ggsave(path(fig_dir, "s9_power_stacked.tif"),
        plot = gs8a / gs8b,
        width = 10, height = 16, scale = 0.6, dpi = 600)
 
@@ -174,8 +174,8 @@ gs9 <- ggplot(power_abd_trend) +
   theme_light() +
   theme(legend.position = "bottom",
         plot.subtitle = element_text(size = rel(0.75)))
-ggsave(path(figures_dir, "s9_power_interaction.png"), plot = gs9,
+ggsave(path(figures_dir, "s10_power_interaction.png"), plot = gs9,
        width = 10, height = 10, scale = 0.6)
-ggsave(path(figures_dir, "s9_power_interaction.tiff"), plot = gs9,
+ggsave(path(figures_dir, "s10_power_interaction.tiff"), plot = gs9,
        width = 10, height = 10, scale = 0.6, dpi = 600)
 

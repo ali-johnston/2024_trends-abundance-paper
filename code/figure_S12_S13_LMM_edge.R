@@ -7,7 +7,7 @@ library(fs)
 base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
 outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S11_S12")
+figures_dir <- path(base_dir, "figures/figure_S12_S13")
 dir_create(figures_dir)
 
 #########################################################
@@ -111,11 +111,11 @@ ggplot(spec_coef, aes(x = overall_log_distance_to_edge_km)) +
   ylab("Number of species") +
   xlab("Mixed model slope") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-plot_loc <- path(figures_dir, paste0("fig11_mixed-model_slope-histogram_", mod_tag, ".png"))
+plot_loc <- path(figures_dir, paste0("fig_S12_mixed-model_slope-histogram_", mod_tag, ".png"))
 ggsave(plot_loc, width = 14, height = 10, units = "cm")
 
 
-plot_loc <- path(figures_dir, paste0("fig11_mixed-model_slope-histogram_", mod_tag, ".tif"))
+plot_loc <- path(figures_dir, paste0("fig_S12_mixed-model_slope-histogram_", mod_tag, ".tif"))
 ggsave(plot_loc, width = 14, height = 10, units = "cm")
 
 
@@ -139,7 +139,7 @@ biome_names_tidy <- c("Arctic tundra", "Aridland", "Forest",
       "Grassland", "Habitat generalists", "Wetland & Coast")
 
 
-plot_loc <- path(figures_dir, paste0("fig12_mixed-model_slopes_", mod_tag, ".tif"))
+plot_loc <- path(figures_dir, paste0("fig_S13_mixed-model_slopes_", mod_tag, ".tif"))
 tiff(plot_loc, width = 14, height = 10, units = "cm", pointsize = 9, res = 600)
 par(mfrow=c(2, 3), mar = c(0.5, 0.5, 0.5, 0.5), oma = c(5,5,2,0))
 biomes <- names(table(spec_coef$breeding_biome))

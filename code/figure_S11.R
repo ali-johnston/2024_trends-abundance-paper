@@ -9,7 +9,7 @@ library(tidyr)
 
 base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
-figures_dir <- path(base_dir, "figures", "figure_S10")
+figures_dir <- path(base_dir, "figures", "figure_S11")
 dir_create(figures_dir)
 
 # all species ----
@@ -45,7 +45,7 @@ gs10 <- ggplot(binned_perf) +
   theme_light() +
   theme(legend.position = "bottom",
         plot.subtitle = element_text(size = rel(0.75)))
-ggsave(path(figures_dir, "gs10_power_trend-magnitude_all-species.png"),
+ggsave(path(figures_dir, "fig_S11_power_trend-magnitude_all-species.png"),
        plot = gs10, width = 10, height = 8, scale = 0.6)
-ggsave(path(figures_dir, "gs10_power_trend-magnitude_all-species.tiff"),
+ggsave(path(figures_dir, "fig_S11_power_trend-magnitude_all-species.tiff"),
        plot = gs10, width = 10, height = 8, scale = 0.6, dpi = 600)
