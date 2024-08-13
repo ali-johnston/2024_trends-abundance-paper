@@ -22,7 +22,8 @@ figures_dir <- path(base_dir, "figures")
 trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
   read_parquet()
 
-srd <- path(data_dir, "srd_27km_year.parquet") |>
+# srd <- path(data_dir, "srd_27km_year.parquet") |>
+srd <- path(data_dir, "srd_27km.parquet") |>
   read_parquet()
 
 # map plotting set-up

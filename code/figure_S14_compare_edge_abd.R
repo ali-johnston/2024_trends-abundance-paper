@@ -13,7 +13,7 @@ library(performance)
 base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
 data_dir <- path(base_dir, "data")
 outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S13")
+figures_dir <- path(base_dir, "figures/figure_S14")
 dir.create(figures_dir)
 
 
@@ -63,6 +63,12 @@ m_edge <- lmer(abd_ppy_median ~ log_distance_to_edge_km +
            weights = weight,
            data = trends)
 
+# m_abd_edge <- lmer(abd_ppy_median ~ log_abd + log_distance_to_edge_km + 
+#           (1 + log_abd + log_distance_to_edge_km|breeding_biome/species_code),
+#            weights = weight,
+#            data = trends)
+
+
 # the slope of log_distance_to_edge_km on breeding_biome
 # had a low variance near to zero. 
 # subsequent model performance checks did not work. 
@@ -81,6 +87,7 @@ m_abd2 <- lmer(abd_ppy_median ~ log_abd +
           (1 + log_abd|species_code),
            weights = weight,
            data = trends)
+
 
 
 AIC(m_edge2) - AIC(m_abd2)
@@ -159,7 +166,7 @@ mc <- max(h1$counts, h2$counts)
 
 
 
-plot_loc <- path(figures_dir, "figure_S13_effect_size_edge_abd.tif"))
+plot_loc <- path(figures_dir, "figure_S14_effect_size_edge_abd.tif")
 tiff(plot_loc, width = 12, height = 12, units = "cm", pointsize = 9, res = 600)
 
   par(mfrow = c(2,1), mar = c(1, 5, 0.5, 0.5), oma = c(4, 0, 0, 0))
