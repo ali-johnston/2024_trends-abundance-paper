@@ -267,8 +267,8 @@ find_opt_rho <- function(mod_data, length_rho_seq = 10,
 	if(rho_method %in% c("first_within_2sd")){
 
 		# find mean and sd of stable part of time series
-		mn_stable <- mean(df$REML[floor(nrow(df) - nrow(df)/3):nrow(df)])
-		sd_stable <- sd(df$REML[floor(nrow(df) - nrow(df)/3):nrow(df)])
+		mn_stable <- mean(df$REML[floor(nrow(df) - nrow(df)/4):nrow(df)])
+		sd_stable <- sd(df$REML[floor(nrow(df) - nrow(df)/4):nrow(df)])
 
 		w4 <- df$REML < (mn_stable + sd_stable*2)
 		first_within_2sd <- min(which(w4))
