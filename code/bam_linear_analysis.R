@@ -530,8 +530,11 @@ run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear",
 		}
 
 		# save slope estimates
-		coefs <- c(extract_effect(fit_mod, variable = "covariate"))
-		coef_df <- data.frame(est = coefs[1], se = coefs[2], t_val = coefs[3], p_val = coefs[4], species_code = species_code)
+		covs <- c(extract_effect(fit_mod, variable = "covariate"))
+		cov_df <- data.frame(est = covs[1], se = covs[2], t_val = covs[3], p_val = covs[4], species_code = species_code)
+		int <- c(extract_effect(fit_mod, variable = "intercept"))
+		int_df <- data.frame(int_est = int[1], int_se = int[2], int_t_val = int[3], int_p_val = int[4], species_code = species_code)
+		coef_df <- cbind(cov_df, int_df)
 
 		# append to file
 		if(file.exists(results_file)) write_csv(coef_df, results_file, append = TRUE)
@@ -562,7 +565,7 @@ trends_sub <- trends_n |>
 
 
 run_name <- "log10_abd_40"
-run_name <- "testtest"
+run_name <- "testtesttest"
 
 scatterplots_dir <- path(outputs_dir,
  			"scatterplots", run_name)
