@@ -564,8 +564,11 @@ trends_sub <- trends_n |>
 		filter(species_code %in% c("abetow", "acafly", "acowoo", "aldfly", "allhum", "altori"))
 
 
+# -------------------------------------------------------
+# run for trends and log_10_abd covariate and 40 rhos. 
+# (can reduce rho for quicker run)
+
 run_name <- "log10_abd_40"
-run_name <- "testtesttest"
 
 scatterplots_dir <- path(outputs_dir,
  			"scatterplots", run_name)
@@ -575,7 +578,7 @@ opt_rho_plots_dir <- path(outputs_dir,
  			"optimise_rho_plots", run_name)
 if(!file.exists(opt_rho_plots_dir)) dir.create(opt_rho_plots_dir)
 
-results_bam_linear <- trends_sub |>
+results_bam_linear <- trends_n |>
 		arrange(n_pixels) |>
 		filter(n_pixels > 100) |>
 		group_by(n_pixels, species_code) |>
@@ -586,58 +589,53 @@ results_bam_linear <- trends_sub |>
 		covariate = "log10_abd")
 
 
+# two smallest range species with linear model. 
+results_bam_linear <- trends_n |>
+		arrange(n_pixels) |>
+		filter(n_pixels <= 100) |>
+		group_by(n_pixels, species_code) |>
+		group_split() |>
+		map_dfr(run_whole_thing_per_species, model_type = "lm_linear", 
+		plots_dir_rho = opt_rho_plots_dir, plots_dir_scatter = scatterplots_dir, 
+		length_rho_seq = 40, file_suffix = run_name, gam_min_ss = 100, 
+		covariate = "log10_abd")
+
+
+
+# -------------------------------------------------------
 # change covariate = "log10_abd" to covariate = "log10_distance_to_edge_km"
-# and rerun. 
+# and rerun.
+
+run_name <- "log10_distance_to_edge_km_40"
+
+scatterplots_dir <- path(outputs_dir,
+ 			"scatterplots", run_name)
+if(!file.exists(scatterplots_dir)) dir.create(scatterplots_dir)
+
+opt_rho_plots_dir <- path(outputs_dir,
+ 			"optimise_rho_plots", run_name)
+if(!file.exists(opt_rho_plots_dir)) dir.create(opt_rho_plots_dir)
+
+results_bam_linear <- trends_n |>
+		arrange(n_pixels) |>
+		filter(n_pixels > 100) |>
+		group_by(n_pixels, species_code) |>
+		group_split() |>
+		map_dfr(run_whole_thing_per_species, model_type = "bam_linear", 
+		plots_dir_rho = opt_rho_plots_dir, plots_dir_scatter = scatterplots_dir, 
+		length_rho_seq = 40, file_suffix = run_name, gam_min_ss = 100, 
+		covariate = "log10_distance_to_edge_km")
 
 
-
-
-
-
-
-
-# mod_data <- trends |> filter(species_code == "mexjay4")
-# test <- run_whole_thing_per_species(mod_data, model_type = "bam_linear", 
-# 		plots_dir_rho = opt_rho_plots_dir, plots_dir_scatter = scatterplots_dir, 
-# 		length_rho_seq = 20, file_suffix = run_name, gam_min_ss = 100, 
-# 		covariate = "log10_distance_to_edge_km")
-
-
-# # -------------------------------------------------------
-# # test run for one species
-
-# run_name <- "test_edge_v2"
-
-# scatterplots_dir <- path(outputs_dir,
-#  			"scatterplots", run_name)
-# if(!file.exists(scatterplots_dir)) dir.create(scatterplots_dir)
-
-# opt_rho_plots_dir <- path(outputs_dir,
-#  			"optimise_rho_plots", run_name)
-# if(!file.exists(opt_rho_plots_dir)) dir.create(opt_rho_plots_dir)
-
-
-# # run_whole_thing_per_species
-# mod_data <- trends |> filter(species_code == "mexjay4")
-# model_type <- "bam_linear"
-# plots_dir_rho <- opt_rho_plots_dir
-# plots_dir_scatter <- scatterplots_dir
-# length_rho_seq <- 30
-# file_suffix <- run_name
-# covariate = "log10_distance_to_edge_km"
-
-# #
-# plots_dir <- plots_dir_rho
-# plot_rho_diagnostic <- TRUE
-# gam_min_ss <- 100
-# gam_max_ss <- 10000
-
-# # fit_opt_model
-# species_code <- mod_data$species_code[1]
-# gam_min_ss = 100; gam_max_ss = 10000
-# rho_method = "first_within_2sd"
-
-# # find_opt_rho
-# plot_flag = TRUE
+# two smallest range species with linear model. 
+results_bam_linear <- trends_n |>
+		arrange(n_pixels) |>
+		filter(n_pixels <= 100) |>
+		group_by(n_pixels, species_code) |>
+		group_split() |>
+		map_dfr(run_whole_thing_per_species, model_type = "lm_linear", 
+		plots_dir_rho = opt_rho_plots_dir, plots_dir_scatter = scatterplots_dir, 
+		length_rho_seq = 40, file_suffix = run_name, gam_min_ss = 100, 
+		covariate = "log10_distance_to_edge_km")
 
 
