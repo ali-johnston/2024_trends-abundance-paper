@@ -422,6 +422,7 @@ plot_model <- function(mod_data, model_output, species_code = NULL, species_name
 	lo <- ifelse(model_type == "gamlss_smooth", 1000, 10)
 	nd <- data.frame(covariate = seq(min(mod_data$covariate), max(mod_data$covariate), length.out = lo))
 
+	# -------------------------------------------------------
 	# plot scatterplot of abundance vs trend
 	# set up plot (to hopefully make pretty for many species)
 	xlimits <- range(mod_data$covariate)
@@ -470,6 +471,57 @@ plot_model <- function(mod_data, model_output, species_code = NULL, species_name
 		abline(int, coef, col = "steelblue", lwd= 1.5)
 
 	dev.off()
+
+
+
+	# -------------------------------------------------------
+	# plot marginal effects plot
+
+	ylimits <- range(mod_data$abd_ppy_median)
+	if(ylimits[2]< -10) ylimits[2] <- -10
+	if(ylimits[1]> 10) ylimits[1] <- 10
+	ylimits <- c(-10, 10)
+
+	# extract coefficient
+	coef <- extract_effect(model_output, variable = "covariate")[1]
+	int <- extract_effect(model_output, variable = "intercept")[1]
+
+	cov_values <- model_obj$model[,"covariate"]
+	pred_cov_only <- int + coef*cov_values
+	resids <- model_obj$residuals
+	pred_plus_resids <- pred_cov_only + resids
+
+	# create useful plot name
+	formatted_slope <- paste0(ifelse(model_type == "gamlss_smooth", "s", ifelse(coef<0, "n", "p")), "_",
+					format(round(abs(coef), digits = 3), nsmall = 3))
+	species_plot_name <- paste0(formatted_slope, "_", species_code, "_", species_name)
+	plot_loc <- path(plots_dir, paste0("species_scatter_marginal_", species_plot_name, ".png"))
+
+	# create file image and set up plot
+	png(plot_loc, width = 8, height = 8, units = "cm", pointsize = 9, res = 600)
+	par(mar = c(5, 5, 3, 3))
+
+		# create plot
+		plot(0, 0, col = "white", 
+		    xlim = xlimits, 
+		    xaxt = "n", xlab = "Relative abundance",
+		    ylim = ylimits,
+		    yaxt = "n", ylab = "Population trend", 
+		    main = species_name, 
+		    mgp = c(1.5, 0.7, 0))
+		axis(side = 1, at = la_vals, labels = 10^la_vals, tcl = -0.3, mgp = c(1.5, 0.5, 0))
+		axis(side = 2, at = c(-10, 0, 10), las = 1, tcl = -0.3, mgp = c(1.5, 0.7, 0))
+
+		abline(h = 0, col = alpha("firebrick", 0.2), lwd = 2)
+
+		points(cov_values, pred_plus_resids, 
+	        pch = 16, col = alpha("steelblue", 0.3),
+			cex = sqrt(mod_data$abd_ppy_sd / mean(mod_data$abd_ppy_sd)))
+
+		abline(int, coef, col = "steelblue", lwd= 1.5)
+
+	dev.off()
+
 
 }
 
@@ -534,7 +586,9 @@ run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear",
 		cov_df <- data.frame(est = covs[1], se = covs[2], t_val = covs[3], p_val = covs[4], species_code = species_code)
 		int <- c(extract_effect(fit_mod, variable = "intercept"))
 		int_df <- data.frame(int_est = int[1], int_se = int[2], int_t_val = int[3], int_p_val = int[4], species_code = species_code)
-		coef_df <- cbind(cov_df, int_df)
+		aic <- AIC(fit_mod[["final_model"]])
+		aic_df <- data.frame(aic = aic)
+		coef_df <- cbind(cov_df, int_df, aic_df)
 
 		# append to file
 		if(file.exists(results_file)) write_csv(coef_df, results_file, append = TRUE)
@@ -568,7 +622,7 @@ trends_sub <- trends_n |>
 # run for trends and log_10_abd covariate and 40 rhos. 
 # (can reduce rho for quicker run)
 
-run_name <- "log10_abd_40"
+run_name <- "log10_abd_40_run2"
 
 scatterplots_dir <- path(outputs_dir,
  			"scatterplots", run_name)
@@ -606,7 +660,7 @@ results_bam_linear <- trends_n |>
 # change covariate = "log10_abd" to covariate = "log10_distance_to_edge_km"
 # and rerun.
 
-run_name <- "log10_distance_to_edge_km_40"
+run_name <- "log10_distance_to_edge_km_40_run2"
 
 scatterplots_dir <- path(outputs_dir,
  			"scatterplots", run_name)
