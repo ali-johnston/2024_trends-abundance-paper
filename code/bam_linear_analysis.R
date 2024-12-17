@@ -633,7 +633,7 @@ opt_rho_plots_dir <- path(outputs_dir,
 if(!file.exists(opt_rho_plots_dir)) dir.create(opt_rho_plots_dir)
 
 results_bam_linear <- trends_n |>
-		arrange(n_pixels) |>
+		arrange(-n_pixels) |>
 		filter(n_pixels > 100) |>
 		group_by(n_pixels, species_code) |>
 		group_split() |>
@@ -671,7 +671,7 @@ opt_rho_plots_dir <- path(outputs_dir,
 if(!file.exists(opt_rho_plots_dir)) dir.create(opt_rho_plots_dir)
 
 results_bam_linear <- trends_n |>
-		arrange(n_pixels) |>
+		arrange(-n_pixels) |>
 		filter(n_pixels > 100) |>
 		group_by(n_pixels, species_code) |>
 		group_split() |>
