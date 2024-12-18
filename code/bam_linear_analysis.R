@@ -148,7 +148,8 @@ fit_1_mod <- function(mod_data, rho,
 	}
 
 	# return required metric
-	return(b_mod)
+	ret <- list(final_model = b_mod, model_type = model_type, rho = rho)
+	return(ret)
 }
 
 
@@ -243,7 +244,7 @@ find_opt_rho <- function(mod_data, length_rho_seq = 10,
 		rho <- rho_sequence_ll[r]
 		mod <- fit_1_mod(mod_data, rho = rho, k.spatial = k.spatial, 
 			model_type = model_type, covariate = covariate)
-		REML[r] <- mod$gcv.ubre
+		REML[r] <- mod[["final_model"]]$gcv.ubre
 	}
 
 	# combine rho and REML into data frame
@@ -342,10 +343,10 @@ fit_opt_model <- function(mod_data, species_code = NULL,
 	if(model_type == "lm_linear") rho_use <- NA 
 
 	# run final model
-	final_model <- fit_1_mod(mod_data, rho = rho_use, k.spatial = k.spatial, model_type = model_type,
+	mod <- fit_1_mod(mod_data, rho = rho_use, k.spatial = k.spatial, model_type = model_type,
 		species_code = species_code, covariate = covariate)
 
-	ret <- list(final_model = final_model, model_type = model_type)
+	ret <- mod
 	return(ret)
 
 }
@@ -530,6 +531,7 @@ plot_model <- function(mod_data, model_output, species_code = NULL, species_name
 # wrapper funciton for everything together 
 
 run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear", 
+	rho_data = NULL, 
 	plots_dir_rho, plot_rho_diagnostic = TRUE,
 	plots_dir_scatter, plot_scatter = TRUE,
 	length_rho_seq = 10,
@@ -549,7 +551,7 @@ run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear",
 	species_name <- species_code
 
 	# this code for pretty species names works on examples, but currently
-	# buggy in bulk for reasons I can't figure out. 
+	# buggy in bulk for reasons I cant figure out. 
 	# if("common_name" %in% colnames(species)){
 	# 	species_name <- species |> filter(species_code == spec_code) |> pull(common_name)
 	# 	species_name <- gsub("\'", "", species_name, fixed = TRUE)
@@ -568,11 +570,24 @@ run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear",
 
 	if(species_results_exist == FALSE){
 
-		# find optimal rho and fit model
-		fit_mod <- fit_opt_model(mod_data = mod_data, model_type = model_type, 
-			length_rho_seq = length_rho_seq, 
-			plots_dir = plots_dir_rho, plot_rho_diagnostic = plot_rho_diagnostic,
-			gam_min_ss = gam_min_ss, gam_max_ss = gam_max_ss, covariate = covariate, ...)
+		if(!is.null(rho_data)){
+			rho_use <- rho_data |> 
+					filter(species_code == spec_code) |>
+					pull(rho)
+
+			# fit model with specified rho
+			fit_mod <- fit_1_mod(mod_data = mod_data, model_type = model_type, 
+				rho = rho_use,
+				gam_min_ss = gam_min_ss, gam_max_ss = gam_max_ss, 
+				covariate = covariate, ...)
+		}
+
+		if(is.null(rho_data)){
+			# find optimal rho and fit model
+			fit_mod <- fit_opt_model(mod_data = mod_data, model_type = model_type, 
+				length_rho_seq = length_rho_seq, 
+				plots_dir = plots_dir_rho, plot_rho_diagnostic = plot_rho_diagnostic,
+				gam_min_ss = gam_min_ss, gam_max_ss = gam_max_ss, covariate = covariate, ...)}
 
 		# plot model
 		if(plot_scatter){
@@ -588,7 +603,9 @@ run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear",
 		int_df <- data.frame(int_est = int[1], int_se = int[2], int_t_val = int[3], int_p_val = int[4], species_code = species_code)
 		aic <- AIC(fit_mod[["final_model"]])
 		aic_df <- data.frame(aic = aic)
-		coef_df <- cbind(cov_df, int_df, aic_df)
+		rho_val <- as.numeric(fit_mod[["rho"]])
+		rho_df <- data.frame(rho = rho_val)
+		coef_df <- cbind(cov_df, int_df, aic_df, rho_df)
 
 		# append to file
 		if(file.exists(results_file)) write_csv(coef_df, results_file, append = TRUE)
@@ -615,7 +632,7 @@ trends_n <- trends |>
 
 # subset to do quick test before full run if useful 
 trends_sub <- trends_n |>
-		filter(species_code %in% c("abetow", "acafly", "acowoo", "aldfly", "allhum", "altori"))
+		filter(species_code %in% c("wilsap", "yebcuc"))
 
 
 # -------------------------------------------------------
