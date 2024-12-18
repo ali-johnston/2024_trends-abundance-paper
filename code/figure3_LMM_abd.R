@@ -17,7 +17,7 @@ dir.create(figures_dir)
 ## load data
 
 # # species lookup
-species <- read_csv("data/master_species_list_495.csv", na = "") |>
+species <- read_csv(path(data_dir, "/master_species_list_495.csv"), na = "") |>
   select(species_code, breeding_biome)
 
 # trends estimates
@@ -131,7 +131,7 @@ biomes <- names(table(spec_coef$breeding_biome))
 biome_names_tidy <- c("Arctic tundra", "Aridland", "Forest",
       "Grassland", "Habitat generalists", "Wetland & Coast")
 
-plot_loc <- path(figure_dir, paste0("fig3b_mixed-model_slopes_", mod_tag, ".png"))
+plot_loc <- path(figures_dir, paste0("fig3b_mixed-model_slopes_", mod_tag, ".png"))
 png(plot_loc, width = 14, height = 10, units = "cm", pointsize = 9, res = 600)
 
 par(mfrow=c(2, 3), mar = c(0.5, 0.5, 0.5, 0.5), oma = c(5,5,2,0))
