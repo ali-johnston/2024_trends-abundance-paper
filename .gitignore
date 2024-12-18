@@ -2,6 +2,7 @@ data/
 figures/
 outputs/
 data.zip
+old/
 
 .Rproj.user
 .DS_Store
