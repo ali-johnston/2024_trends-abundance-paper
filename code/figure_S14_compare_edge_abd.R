@@ -66,7 +66,7 @@ abd_range <- trends |>
 #########################################################
 ## read in abundance results and calculate effect sizes
 
-mod_tag <- "log10_abd_40"
+mod_tag <- "log10_abd_40_run2"
 
 results_loc1 <- path(outputs_dir, paste0("species_coefs_bam_linear_", mod_tag, ".csv"))
 results_loc2 <- path(outputs_dir, paste0("species_coefs_lm_linear_", mod_tag, ".csv"))
@@ -97,7 +97,7 @@ dist_range <- trends |>
 #########################################################
 ## read in abundance results and calculate effect sizes
 
-mod_tag <- "log10_distance_to_edge_km_40"
+mod_tag <- "log10_distance_to_edge_km_40_run2"
 
 results_loc1 <- path(outputs_dir, paste0("species_coefs_bam_linear_", mod_tag, ".csv"))
 results_loc2 <- path(outputs_dir, paste0("species_coefs_lm_linear_", mod_tag, ".csv"))
@@ -215,5 +215,153 @@ sd(pred_compare$pred_diff_edge)
 # [1] 1.199214
 sd(pred_compare$pred_diff_abd)
 # [1] 2.527926
+
+
+
+
+#########################################################
+## compare AIC
+
+
+# -------------------------------------------------------
+# read in abundance model AIC
+
+mod_tag <- "log10_abd_40_run2"
+
+results_loc1_abd <- path(outputs_dir, paste0("species_coefs_bam_linear_", mod_tag, ".csv"))
+results_loc2_abd <- path(outputs_dir, paste0("species_coefs_lm_linear_", mod_tag, ".csv"))
+
+aic_abd_df <- read_csv(results_loc1_abd) |>
+              bind_rows(read_csv(results_loc2_abd)) |>
+              dplyr::select(species_code...5, aic) |>
+              rename(species_code = species_code...5) |>
+              rename(aic_abd = aic)
+
+# -------------------------------------------------------
+# read in edge model AIC
+
+mod_tag <- "log10_distance_to_edge_km_40_run2"
+
+results_loc1_edge <- path(outputs_dir, paste0("species_coefs_bam_linear_", mod_tag, ".csv"))
+results_loc2_edge <- path(outputs_dir, paste0("species_coefs_lm_linear_", mod_tag, ".csv"))
+
+aic_edge_df <- read_csv(results_loc1_edge) |>
+              bind_rows(read_csv(results_loc2_edge)) |>
+              dplyr::select(species_code...5, aic) |>
+              rename(species_code = species_code...5) |>
+              rename(aic_edge = aic)
+
+
+# -------------------------------------------------------
+# compare AIC by species
+
+aic_comp <- aic_abd_df |>
+              left_join(aic_edge_df, by = "species_code") |>
+              mutate(delta_aic = aic_edge - aic_abd) |>
+              mutate(abd_imp = ifelse(delta_aic > 0, 1, 0)) |>
+              mutate(delta_aic_within2 = ifelse(delta_aic < 2 & delta_aic > -2, 1, 0)) |>
+              mutate(abd_imp_2 = ifelse(delta_aic > 2, 1, 0)) |>
+              mutate(edge_imp_2 = ifelse(delta_aic < -2, 1, 0)) |>
+              filter(!is.na(aic_abd), !is.na(aic_edge))
+
+nrow(aic_comp)
+
+median(aic_comp$delta_aic, na.rm = TRUE)
+# [1] 28.15127
+sd(aic_comp$delta_aic, na.rm = TRUE)
+# [1] 254.7087
+
+mean(aic_comp$delta_aic_within2, na.rm = TRUE) |> round(2)
+# [1] 0.09
+
+mean(aic_comp$abd_imp_2, na.rm = TRUE) |> round(2)
+# [1] 0.71
+
+mean(aic_comp$edge_imp_2, na.rm = TRUE) |> round(2)
+# [1] 0.20
+
+hist(aic_comp$delta_aic, breaks = 100)
+hist(aic_comp$delta_aic, breaks = seq(-2000, 3000, by = 2), xlim = c(-50, 50))
+
+
+#########################################################
+## AIC by effect size
+
+aic_effect_size <- aic_comp |>
+            dplyr::select(species_code, delta_aic) |>
+            left_join(spec_coef_abd, by = "species_code") |>
+            mutate(neg = ifelse(pred_diff_abd < 0, 1, 0)) |>
+            mutate(delta_cat = ifelse(delta_aic < -2, "A", ifelse(delta_aic < 2, "B", "C"))) |>
+            mutate(delta_cat2 = ifelse(delta_aic < -4, "A", ifelse(delta_aic < -2, "B", ifelse(delta_aic < 2, "C", ifelse(delta_aic < 4, "D", "E")))))
+
+aic_effect_size |>
+          dplyr::select(delta_cat, neg) |>
+          group_by(delta_cat) |> 
+          summarise(prop_neg = mean(neg), n_spec = n())
+
+# # A tibble: 3 x 3
+#   delta_cat prop_neg n_spec
+#   <chr>        <dbl>  <int>
+# 1 A            0.526     97  0.53
+# 2 B            0.766     47  0.77
+# 3 C            0.917    351  0.92
+
+
+#########################################################
+## read in abundance results and calculate effect sizes
+
+mod_tag <- "log10_abd_40_run2"
+
+results_loc1 <- path(outputs_dir, paste0("species_coefs_bam_linear_", mod_tag, ".csv"))
+results_loc2 <- path(outputs_dir, paste0("species_coefs_lm_linear_", mod_tag, ".csv"))
+
+aic_sig_cross <- read_csv(results_loc1) |>
+              bind_rows(read_csv(results_loc2)) |>
+              mutate(sig = ifelse(p_val < 0.05, "s", "ns")) |>
+              mutate(sig_fac = factor(sig, levels = c("s", "ns"), ordered = TRUE)) |>
+              rename(species_code = species_code...5) |>
+              left_join(species, by = "species_code") |>
+              dplyr::select(-species_code...10) |>
+              merge(dplyr::select(abd_range, -breeding_biome), by = "species_code") |>
+              mutate(effect_size = est*(max_log_abd - min_log_abd)) |>
+              dplyr::select(species_code, effect_size, sig, sig_fac) |>
+              rename(pred_diff_abd = effect_size) |>
+              left_join(dplyr::select(aic_comp, species_code, delta_aic, abd_imp, delta_aic_within2)) |>
+              mutate(delta_cat = ifelse(delta_aic < -2, "edge", ifelse(delta_aic < 2, "both", "abd"))) |>
+              mutate(dir = ifelse(pred_diff_abd < 0, ifelse(sig == "s", "neg_sig", "neg"), ifelse(sig == "s", "pos_sig", "pos"))) |>
+              mutate(dir = factor(dir, levels = c("neg_sig", "neg", "pos", "pos_sig"), ordered = TRUE)) |>
+              dplyr::select(delta_cat, dir) |>
+              table()
+
+aic_sig_cross
+
+#          dir
+# delta_cat neg_sig neg pos pos_sig
+#      abd      171  78  62      40
+#      both       7  15  19       6
+#      edge      17   2   3      75
+
+chisq.test(aic_sig_cross)
+#   Pearson's Chi-squared test
+
+# data:  aic_sig_cross
+# X-squared = 211.51, df = 6, p-value < 2.2e-16
+
+
+rowsums <- matrix(rep(apply(aic_sig_cross, 1, sum) /495, 4), 
+  nrow = nrow(aic_sig_cross), ncol = ncol(aic_sig_cross))
+
+colsums <- matrix(rep(apply(aic_sig_cross, 2, sum) /495, 3), 
+  nrow = nrow(aic_sig_cross), ncol = ncol(aic_sig_cross), byrow = TRUE)
+
+expected <- round(rowsums * colsums * 495, 3)
+
+o_minus_e <- round(aic_sig_cross - expected, 0)
+
+# delta_cat neg_sig neg pos pos_sig
+#      abd       33  11   2     -46
+#      both     -12   6  11      -5
+#      edge     -21 -17 -13      51
+
 
 
