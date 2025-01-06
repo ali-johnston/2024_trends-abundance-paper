@@ -7,9 +7,8 @@ library(readr)
 library(tidyr)
 library(auk)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-figures_dir <- path(base_dir, "figures", "figure_S9-S10")
+data_dir <- "data"
+figures_dir <- path("figures", "figure_S9-S10")
 dir_create(figures_dir)
 
 tax <- select(auk::ebird_taxonomy, species_code, common_name)
@@ -137,10 +136,10 @@ gs8b <- ggplot(power_abd) +
   theme_light() +
   theme(legend.position = "bottom",
         plot.subtitle = element_text(size = rel(0.75)))
-ggsave(path(fig_dir, "s9b_power_abundance.png"), plot = gs8b,
+ggsave(path(figures_dir, "s9b_power_abundance.png"), plot = gs8b,
        width = 10, height = 8, scale = 0.6)
 # stack figures
-ggsave(path(fig_dir, "s9_power_stacked.tif"),
+ggsave(path(figures_dir, "s9_power_stacked.tif"),
        plot = gs8a / gs8b,
        width = 10, height = 16, scale = 0.6, dpi = 600)
 
@@ -178,4 +177,3 @@ ggsave(path(figures_dir, "s10_power_interaction.png"), plot = gs9,
        width = 10, height = 10, scale = 0.6)
 ggsave(path(figures_dir, "s10_power_interaction.tiff"), plot = gs9,
        width = 10, height = 10, scale = 0.6, dpi = 600)
-

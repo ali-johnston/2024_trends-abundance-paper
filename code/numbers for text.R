@@ -3,9 +3,7 @@ library(tidyverse)
 library(arrow)
 library(fs)
 
-
-base_dir <- "/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
+data_dir <-  "data"
 
 
 #########################################################
@@ -28,7 +26,8 @@ tr_sp <- trends |>
   group_by(species_code) |>
   summarise(tr_min = min(abd_ppy_median), tr_max = max(abd_ppy_median), no_cells = n(),
     tr_med = median(abd_ppy_median), sum_abd = sum(abd), sum_tr_abd = sum(abd*abd_ppy_median),
-    prop_range_dec = mean(abd_ppy_median < 0)) |>
+    prop_range_dec = mean(abd_ppy_median < 0),
+    .groups = "drop") |>
   mutate(tr_range = tr_max - tr_min,
           tr_wt_avg = sum_tr_abd / sum_abd) |>
   dplyr::select(species_code, no_cells, tr_med, tr_wt_avg, tr_range, prop_range_dec) |>

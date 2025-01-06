@@ -3,11 +3,10 @@ library(tidyverse)
 library(arrow)
 library(fs)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S1")
-dir.create(figures_dir)
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- path("figures", "figure_S1")
+dir_create(figures_dir)
 
 
 #########################################################
@@ -30,7 +29,8 @@ trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
 
 tr_sp_bcr <- trends |>
   group_by(species_code, region_code) |>
-  summarise(tr_min = min(abd_ppy_median), tr_max = max(abd_ppy_median), no_cells = n()) |>
+  summarise(tr_min = min(abd_ppy_median), tr_max = max(abd_ppy_median), no_cells = n(),
+            .groups = "drop") |>
   mutate(tr_range = tr_max - tr_min) |>
   mutate(at_least_20 = ifelse(no_cells >= 20, 1, 0))
 
@@ -59,10 +59,3 @@ par(mar = c(5, 5, 1, 1))
     legend = c("BCR-species < 20 cells", "BCR-species >= 20 cells"), cex = 0.8)
 
 dev.off()
-
-
-
-
-
-
-

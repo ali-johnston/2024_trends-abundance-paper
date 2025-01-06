@@ -10,17 +10,17 @@ library(maps)
 library(geosphere)
 library(fs)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure3/bam")
-dir.create(figures_dir, recursive = TRUE)
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- path("figures", "figure3/bam")
+dir_create(figures_dir)
 
 #########################################################
 ## load data
 
 # # species lookup
-species <- read_csv(path(data_dir, "/master_species_list_495.csv"), na = "") |>
+species <- read_csv(path(data_dir, "/master_species_list_495.csv"), na = "",
+                    show_col_types = FALSE) |>
   select(species_code, common_name, breeding_biome)
 
 trends <- path(data_dir, "ebird-trends_2021_weights.parquet") |>
@@ -562,7 +562,7 @@ run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear",
 	results_file <- path(outputs_dir, paste0("species_coefs_", model_type, "_", file_suffix, ".csv"))
 	species_results_exist <- FALSE
 	if(file.exists(results_file)){
-		check <- read_csv(results_file)
+		check <- read_csv(results_file, show_col_types = FALSE)
 		species_results_exist <- ifelse(any(check$species_code == spec_code), TRUE, FALSE)	
 	}
 
@@ -600,7 +600,7 @@ run_whole_thing_per_species <- function(mod_data, model_type = "lm_linear",
 		covs <- c(extract_effect(fit_mod, variable = "covariate"))
 		cov_df <- data.frame(est = covs[1], se = covs[2], t_val = covs[3], p_val = covs[4], species_code = species_code)
 		int <- c(extract_effect(fit_mod, variable = "intercept"))
-		int_df <- data.frame(int_est = int[1], int_se = int[2], int_t_val = int[3], int_p_val = int[4], species_code = species_code)
+		int_df <- data.frame(int_est = int[1], int_se = int[2], int_t_val = int[3], int_p_val = int[4])
 		aic <- AIC(fit_mod[["final_model"]])
 		aic_df <- data.frame(aic = aic)
 		rho_val <- as.numeric(fit_mod[["rho"]])
@@ -641,13 +641,11 @@ trends_sub <- trends_n |>
 
 run_name <- "log10_abd_40_run2"
 
-scatterplots_dir <- path(outputs_dir,
- 			"scatterplots", run_name)
-if(!file.exists(scatterplots_dir)) dir.create(scatterplots_dir)
+scatterplots_dir <- path(outputs_dir, "scatterplots", run_name)
+dir_create(scatterplots_dir)
 
-opt_rho_plots_dir <- path(outputs_dir,
- 			"optimise_rho_plots", run_name)
-if(!file.exists(opt_rho_plots_dir)) dir.create(opt_rho_plots_dir)
+opt_rho_plots_dir <- path(outputs_dir, "optimise_rho_plots", run_name)
+dir_create(opt_rho_plots_dir)
 
 results_bam_linear <- trends_n |>
 		arrange(-n_pixels) |>
@@ -679,13 +677,11 @@ results_bam_linear <- trends_n |>
 
 run_name <- "log10_distance_to_edge_km_40_run2"
 
-scatterplots_dir <- path(outputs_dir,
- 			"scatterplots", run_name)
-if(!file.exists(scatterplots_dir)) dir.create(scatterplots_dir)
+scatterplots_dir <- path(outputs_dir, "scatterplots", run_name)
+dir_create(scatterplots_dir)
 
-opt_rho_plots_dir <- path(outputs_dir,
- 			"optimise_rho_plots", run_name)
-if(!file.exists(opt_rho_plots_dir)) dir.create(opt_rho_plots_dir)
+opt_rho_plots_dir <- path(outputs_dir, "optimise_rho_plots", run_name)
+dir_create(opt_rho_plots_dir)
 
 results_bam_linear <- trends_n |>
 		arrange(-n_pixels) |>

@@ -3,11 +3,10 @@ library(lme4)
 library(arrow)
 library(fs)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures", "figure_S2")
-dir.create(figures_dir)
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- path("figures", "figure_S2")
+dir_create(figures_dir)
 
 
 #########################################################
@@ -30,7 +29,7 @@ by_species <- trends |>
   group_by(species_code, season) |>
   summarise(tot_abd = sum(abd), 
     tot_wt_ppy = sum(abd_mult_ppy),
-    prop_dec = mean(abd_ppy_median<0)) |>
+    prop_dec = mean(abd_ppy_median<0), .groups = "drop") |>
   mutate(wt_trend = tot_wt_ppy / tot_abd) |>
   mutate(wt_trend_cat = cut(wt_trend, breaks = seq(-10, 4, by = 1)))
 
