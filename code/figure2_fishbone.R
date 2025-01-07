@@ -13,10 +13,9 @@ library(stringr)
 library(tidyr)
 library(purrr)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures")
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- "figures"
 
 # read in trends estimates with breeding biomes and srd information
 trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
@@ -90,5 +89,3 @@ g <- ggplot(trends_quantiles) +
         axis.text.y = element_blank())
 ggsave(path(fig_dir, fig_name), g,
        width = 8, height = 12, bg = "white")
-
-

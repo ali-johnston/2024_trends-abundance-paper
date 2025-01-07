@@ -5,10 +5,9 @@ library(arrow)
 library(fs)
 library(ggplot2)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S12_S13")
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- path("figures", "figure_S12_S13")
 dir_create(figures_dir)
 
 #########################################################
@@ -111,7 +110,6 @@ ggsave(plot_loc, width = 14, height = 10, units = "cm")
 
 spec_coef <- spec_coef |> 
   mutate(direction = ifelse(est>0, "pos", "neg"))
-
   spec_coef |>
   dplyr::select(sig_fac, direction) |>
   table()

@@ -7,9 +7,8 @@ library(readr)
 library(tidyr)
 
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-figures_dir <- path(base_dir, "figures", "figure_S11")
+data_dir <- "data"
+figures_dir <- path("figures", "figure_S11")
 dir_create(figures_dir)
 
 # all species ----

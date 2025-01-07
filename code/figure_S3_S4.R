@@ -6,11 +6,9 @@ library(ggplot2)
 library(ggh4x)
 library(tidyr)
 
-
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S3_S4")
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- path("figures", "figure_S3_S4")
 dir_create(figures_dir)
 
 
@@ -24,7 +22,7 @@ trends_rw_folds <- path(data_dir,
 # order biomes by amount of decline
 biome_order <- trends_rw_folds |>
   group_by(breeding_biome) |>
-  summarise(prop_decline_range = median(prop_decline_range)) |>
+  summarise(prop_decline_range = median(prop_decline_range), .groups ="drop") |>
   arrange(desc(prop_decline_range)) |>
   pull(breeding_biome)
 trends_rw_folds$breeding_biome <- factor(trends_rw_folds$breeding_biome,

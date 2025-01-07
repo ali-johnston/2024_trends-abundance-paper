@@ -7,15 +7,12 @@ library(fs)
 library(lme4)
 library(arrow)
 library(performance)
+library(car)
 
-
-
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures/figure_S14")
-dir.create(figures_dir)
-
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- path("figures", "figure_S14")
+dir_create(figures_dir)
 
 
 #########################################################
@@ -30,7 +27,7 @@ species <- path(data_dir, "master_species_list_495.csv") |>
 # trends estimates
 trends <- path(data_dir, "ebird-trends_2021_weights.parquet") |>
   read_parquet() |>
-  left_join(species) |>
+  left_join(species, by = join_by(species_code)) |>
   mutate(log10_abd = log10(abd),
          log10_distance_to_edge_km = log10(distance_to_edge_km),
          breeding_biome = factor(breeding_biome),
@@ -193,8 +190,6 @@ t.test(pred_compare$pred_diff_edge, pred_compare$pred_diff_abd)
 # sample estimates:
 #  mean of x  mean of y 
 # -0.1497959 -2.0093365 
-
-library(car)
 
 df <- pred_compare |>
       dplyr::select(pred_diff_abd, pred_diff_edge) |>

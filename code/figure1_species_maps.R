@@ -12,10 +12,9 @@ library(sf)
 library(stringr)
 library(tidyr)
 
-base_dir <- "/Users/Alison/Documents/REPOS/2024_trends-abundance-paper/"
-data_dir <- path(base_dir, "data")
-outputs_dir <- path(base_dir, "outputs")
-figures_dir <- path(base_dir, "figures")
+data_dir <- "data"
+outputs_dir <- "outputs"
+figures_dir <- "figures"
 
 # read in trends estimates with breeding biomes and srd information
 trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
@@ -167,4 +166,3 @@ for (species in focal_species) {
     dev.off()
   }
 }
-
