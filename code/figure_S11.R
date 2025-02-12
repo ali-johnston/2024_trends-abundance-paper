@@ -48,3 +48,4 @@ ggsave(path(figures_dir, "fig_S11_power_trend-magnitude_all-species.png"),
        plot = gs10, width = 10, height = 8, scale = 0.6)
 ggsave(path(figures_dir, "fig_S11_power_trend-magnitude_all-species.tiff"),
        plot = gs10, width = 10, height = 8, scale = 0.6, dpi = 600)
+
