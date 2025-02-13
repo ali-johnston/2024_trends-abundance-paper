@@ -1,0 +1,495 @@
+breeding_biome,species_code,common_name,season
+Arctic Tundra,amepip,American Pipit,nonbreeding
+Arctic Tundra,amtspa,American Tree Sparrow,nonbreeding
+Arctic Tundra,bkbplo,Black-bellied Plover,nonbreeding
+Arctic Tundra,blksco2,Black Scoter,nonbreeding
+Arctic Tundra,brant,Brant,nonbreeding
+Arctic Tundra,cacgoo1,Cackling Goose,nonbreeding
+Arctic Tundra,comred,Redpoll (Common),nonbreeding
+Arctic Tundra,dunlin,Dunlin,nonbreeding
+Arctic Tundra,gcrfin,Gray-crowned Rosy-Finch,nonbreeding
+Arctic Tundra,gocspa,Golden-crowned Sparrow,nonbreeding
+Arctic Tundra,gresca,Greater Scaup,nonbreeding
+Arctic Tundra,gwfgoo,Greater White-fronted Goose,nonbreeding
+Arctic Tundra,harspa,Harris's Sparrow,nonbreeding
+Arctic Tundra,laplon,Lapland Longspur,nonbreeding
+Arctic Tundra,lbbgul,Lesser Black-backed Gull,nonbreeding
+Arctic Tundra,lobdow,Long-billed Dowitcher,nonbreeding
+Arctic Tundra,norshr4,Northern Shrike,nonbreeding
+Arctic Tundra,pacloo,Pacific Loon,nonbreeding
+Arctic Tundra,pursan,Purple Sandpiper,nonbreeding
+Arctic Tundra,rebmer,Red-breasted Merganser,nonbreeding
+Arctic Tundra,redkno,Red Knot,nonbreeding
+Arctic Tundra,retloo,Red-throated Loon,nonbreeding
+Arctic Tundra,rolhaw,Rough-legged Hawk,nonbreeding
+Arctic Tundra,rudtur,Ruddy Turnstone,nonbreeding
+Arctic Tundra,sander,Sanderling,nonbreeding
+Arctic Tundra,snobun,Snow Bunting,nonbreeding
+Arctic Tundra,snogoo,Snow Goose,nonbreeding
+Arctic Tundra,snoowl1,Snowy Owl,nonbreeding
+Arctic Tundra,surfbi,Surfbird,nonbreeding
+Arctic Tundra,tunswa,Tundra Swan,nonbreeding
+Aridlands,abetow,Abert's Towhee,resident
+Aridlands,allhum,Allen's Hummingbird,breeding
+Aridlands,altori,Altamira Oriole,resident
+Aridlands,annhum,Anna's Hummingbird,breeding
+Aridlands,astfly,Ash-throated Flycatcher,breeding
+Aridlands,audori,Audubon's Oriole,resident
+Aridlands,belspa2,Bell's Sparrow,breeding
+Aridlands,belvir,Bell's Vireo,breeding
+Aridlands,bewwre,Bewick's Wren,breeding
+Aridlands,bkcspa,Black-chinned Sparrow,breeding
+Aridlands,bktgna,Black-tailed Gnatcatcher,resident
+Aridlands,bktspa,Black-throated Sparrow,breeding
+Aridlands,blctit4,Black-crested Titmouse,resident
+Aridlands,bncfly,Brown-crested Flycatcher,breeding
+Aridlands,botspa,Botteri's Sparrow,resident
+Aridlands,brbhum,Broad-billed Hummingbird,breeding
+Aridlands,brespa,Brewer's Sparrow,breeding
+Aridlands,brocow,Bronzed Cowbird,resident
+Aridlands,bubhum,Buff-bellied Hummingbird,resident
+Aridlands,cacwre,Cactus Wren,resident
+Aridlands,calgna,California Gnatcatcher,resident
+Aridlands,calqua,California Quail,resident
+Aridlands,calthr,California Thrasher,resident
+Aridlands,caltow,California Towhee,resident
+Aridlands,cantow,Canyon Towhee,resident
+Aridlands,canwre,Canyon Wren,resident
+Aridlands,cavswa,Cave Swallow,breeding
+Aridlands,chirav,Chihuahuan Raven,resident
+Aridlands,clcrob,Clay-colored Thrush,resident
+Aridlands,cogdov,Common Ground Dove,resident
+Aridlands,comblh1,Common Black Hawk,breeding
+Aridlands,compau,Common Pauraque,resident
+Aridlands,coshum,Costa's Hummingbird,breeding
+Aridlands,coukin,Couch's Kingbird,resident
+Aridlands,crithr,Crissal Thrasher,resident
+Aridlands,cubthr,Curve-billed Thrasher,resident
+Aridlands,gamqua,Gambel's Quail,resident
+Aridlands,gilfli,Gilded Flicker,resident
+Aridlands,gilwoo,Gila Woodpecker,resident
+Aridlands,gnttow,Green-tailed Towhee,breeding
+Aridlands,gofwoo,Golden-fronted Woodpecker,resident
+Aridlands,grekis,Great Kiskadee,resident
+Aridlands,greroa,Greater Roadrunner,resident
+Aridlands,grnjay,Green Jay,resident
+Aridlands,gryhaw2,Gray Hawk,breeding
+Aridlands,hooori,Hooded Oriole,breeding
+Aridlands,hrshaw,Harris's Hawk,resident
+Aridlands,incdov,Inca Dove,resident
+Aridlands,labwoo,Ladder-backed Woodpecker,resident
+Aridlands,lawgol,Lawrence's Goldfinch,breeding
+Aridlands,lecthr,LeConte's Thrasher,resident
+Aridlands,lesnig,Lesser Nighthawk,breeding
+Aridlands,lobthr,Long-billed Thrasher,resident
+Aridlands,lucwar,Lucy's Warbler,breeding
+Aridlands,nobtyr,Northern Beardless-Tyrannulet,breeding
+Aridlands,olispa,Olive Sparrow,resident
+Aridlands,phaino,Phainopepla,resident
+Aridlands,placha,Plain Chachalaca,resident
+Aridlands,prafal,Prairie Falcon,nonbreeding
+Aridlands,pyrrhu,Pyrrhuloxia,resident
+Aridlands,rebpig1,Red-billed Pigeon,resident
+Aridlands,rocwre,Rock Wren,breeding
+Aridlands,rucspa,Rufous-crowned Sparrow,resident
+Aridlands,ruwspa,Rufous-winged Sparrow,resident
+Aridlands,sagspa1,Sagebrush Sparrow,breeding
+Aridlands,sagthr,Sage Thrasher,breeding
+Aridlands,scaqua,Scaled Quail,resident
+Aridlands,verdin,Verdin,resident
+Aridlands,verfly,Vermilion Flycatcher,breeding
+Aridlands,vichum,Violet-crowned Hummingbird,breeding
+Aridlands,whcsee1,Morelet's Seedeater,resident
+Aridlands,whtdov,White-tipped Dove,resident
+Aridlands,whthaw,White-tailed Hawk,resident
+Aridlands,whtswi,White-throated Swift,breeding
+Aridlands,whwdov,White-winged Dove,breeding
+Aridlands,wrenti,Wrentit,resident
+Forest,acafly,Acadian Flycatcher,breeding
+Forest,acowoo,Acorn Woodpecker,resident
+Forest,aldfly,Alder Flycatcher,breeding
+Forest,amegfi,American Goldfinch,breeding
+Forest,amered,American Redstart,breeding
+Forest,amerob,American Robin,nonbreeding
+Forest,amewoo,American Woodcock,breeding
+Forest,ariwoo,Arizona Woodpecker,resident
+Forest,bacspa,Bachman's Sparrow,resident
+Forest,balori,Baltimore Oriole,breeding
+Forest,batpig1,Band-tailed Pigeon,breeding
+Forest,bawwar,Black-and-white Warbler,breeding
+Forest,bicthr,Bicknell's Thrush,breeding
+Forest,bkbcuc,Black-billed Cuckoo,breeding
+Forest,bkbwar,Blackburnian Warbler,breeding
+Forest,bkcchi,Black-capped Chickadee,resident
+Forest,bkchum,Black-chinned Hummingbird,breeding
+Forest,bkhgro,Black-headed Grosbeak,breeding
+Forest,bkwvir,Black-whiskered Vireo,breeding
+Forest,blkswi,Black Swift,breeding
+Forest,blugrb1,Blue Grosbeak,breeding
+Forest,blujay,Blue Jay,breeding
+Forest,bnhnut,Brown-headed Nuthatch,resident
+Forest,bohwax,Bohemian Waxwing,nonbreeding
+Forest,borchi2,Boreal Chickadee,resident
+Forest,brdowl,Barred Owl,resident
+Forest,britit,Bridled Titmouse,resident
+Forest,brncre,Brown Creeper,breeding
+Forest,brnthr,Brown Thrasher,breeding
+Forest,brthum,Broad-tailed Hummingbird,breeding
+Forest,brwhaw,Broad-winged Hawk,breeding
+Forest,btbwar,Black-throated Blue Warbler,breeding
+Forest,btnwar,Black-throated Green Warbler,breeding
+Forest,btywar,Black-throated Gray Warbler,breeding
+Forest,bulori,Bullock's Oriole,breeding
+Forest,bushti,Bushtit,resident
+Forest,buthum,Blue-throated Mountain-gem,resident
+Forest,buwwar,Blue-winged Warbler,breeding
+Forest,calhum,Calliope Hummingbird,breeding
+Forest,camwar,Cape May Warbler,nonbreeding
+Forest,canwar,Canada Warbler,breeding
+Forest,carchi,Carolina Chickadee,resident
+Forest,carwre,Carolina Wren,resident
+Forest,casfin,Cassin's Finch,breeding
+Forest,caskin,Cassin's Kingbird,breeding
+Forest,casvir,Cassin's Vireo,breeding
+Forest,cedwax,Cedar Waxwing,breeding
+Forest,cerwar,Cerulean Warbler,breeding
+Forest,chbchi,Chestnut-backed Chickadee,resident
+Forest,chispa,Chipping Sparrow,breeding
+Forest,chiswi,Chimney Swift,breeding
+Forest,chswar,Chestnut-sided Warbler,breeding
+Forest,clanut,Clark's Nutcracker,resident
+Forest,coohaw,Cooper's Hawk,breeding
+Forest,corfly,Western Flycatcher (Cordilleran),breeding
+Forest,cowscj1,California Scrub-Jay,resident
+Forest,daejun,Dark-eyed Junco,breeding
+Forest,dowwoo,Downy Woodpecker,resident
+Forest,ducfly,Dusky-capped Flycatcher,breeding
+Forest,dusfly,Dusky Flycatcher,breeding
+Forest,dusgro,Dusky Grouse,resident
+Forest,easblu,Eastern Bluebird,breeding
+Forest,easowl1,Eastern Screech-Owl,resident
+Forest,easpho,Eastern Phoebe,breeding
+Forest,eastow,Eastern Towhee,breeding
+Forest,eawpew,Eastern Wood-Pewee,breeding
+Forest,eletro,Elegant Trogon,resident
+Forest,evegro,Evening Grosbeak,breeding
+Forest,fiespa,Field Sparrow,breeding
+Forest,flaowl,Flammulated Owl,breeding
+Forest,flsjay,Florida Scrub-Jay,resident
+Forest,foxspa,Fox Sparrow,nonbreeding
+Forest,gchwar,Golden-cheeked Warbler,breeding
+Forest,gockin,Golden-crowned Kinglet,nonbreeding
+Forest,gowwar,Golden-winged Warbler,breeding
+Forest,grawar,Grace's Warbler,breeding
+Forest,grcfly,Great Crested Flycatcher,breeding
+Forest,grepew,Greater Pewee,breeding
+Forest,grycat,Gray Catbird,breeding
+Forest,gryfly,Gray Flycatcher,breeding
+Forest,gryjay,Canada Jay,resident
+Forest,grykin,Gray Kingbird,breeding
+Forest,gryvir,Gray Vireo,breeding
+Forest,haiwoo,Hairy Woodpecker,resident
+Forest,hamfly,Hammond's Flycatcher,breeding
+Forest,heptan,Hepatic Tanager,breeding
+Forest,herthr,Hermit Thrush,breeding
+Forest,herwar,Hermit Warbler,breeding
+Forest,hoowar,Hooded Warbler,breeding
+Forest,houwre,Northern House Wren,breeding
+Forest,hutvir,Hutton's Vireo,resident
+Forest,indbun,Indigo Bunting,breeding
+Forest,juntit1,Juniper Titmouse,resident
+Forest,kenwar,Kentucky Warbler,breeding
+Forest,lazbun,Lazuli Bunting,breeding
+Forest,leafly,Least Flycatcher,breeding
+Forest,lesgol,Lesser Goldfinch,breeding
+Forest,lewwoo,Lewis's Woodpecker,breeding
+Forest,linspa,Lincoln's Sparrow,breeding
+Forest,loeowl,Long-eared Owl,nonbreeding
+Forest,louwat,Louisiana Waterthrush,breeding
+Forest,macwar,MacGillivray's Warbler,breeding
+Forest,maghum1,Rivoli's Hummingbird,breeding
+Forest,magwar,Magnolia Warbler,breeding
+Forest,mexjay4,Mexican Jay,resident
+Forest,miskit,Mississippi Kite,breeding
+Forest,moublu,Mountain Bluebird,breeding
+Forest,mouchi,Mountain Chickadee,resident
+Forest,mouqua,Mountain Quail,resident
+Forest,mouwar,Mourning Warbler,breeding
+Forest,naswar,Nashville Warbler,breeding
+Forest,nopowl,Northern Pygmy-Owl,resident
+Forest,norbob,Northern Bobwhite,resident
+Forest,norcar,Northern Cardinal,resident
+Forest,norfli,Northern Flicker,breeding
+Forest,norgos,American Goshawk,nonbreeding
+Forest,norpar,Northern Parula,breeding
+Forest,norwat,Northern Waterthrush,breeding
+Forest,nutwoo,Nuttall's Woodpecker,resident
+Forest,oaktit,Oak Titmouse,resident
+Forest,oliwar,Olive Warbler,resident
+Forest,olsfly,Olive-sided Flycatcher,breeding
+Forest,orcori,Orchard Oriole,breeding
+Forest,orcwar,Orange-crowned Warbler,breeding
+Forest,ovenbi1,Ovenbird,breeding
+Forest,pacwre1,Pacific Wren,breeding
+Forest,paibun,Painted Bunting,breeding
+Forest,paired,Painted Redstart,breeding
+Forest,palwar,Palm Warbler,nonbreeding
+Forest,pasfly,Western Flycatcher (Pacific-slope),breeding
+Forest,pilwoo,Pileated Woodpecker,resident
+Forest,pingro,Pine Grosbeak,nonbreeding
+Forest,pinjay,Pinyon Jay,resident
+Forest,pinsis,Pine Siskin,nonbreeding
+Forest,pinwar,Pine Warbler,breeding
+Forest,plsvir,Plumbeous Vireo,breeding
+Forest,prawar,Prairie Warbler,breeding
+Forest,prowar,Prothonotary Warbler,breeding
+Forest,purfin,Purple Finch,breeding
+Forest,pygnut,Pygmy Nuthatch,resident
+Forest,rebnut,Red-breasted Nuthatch,breeding
+Forest,rebsap,Red-breasted Sapsucker,breeding
+Forest,rebwoo,Red-bellied Woodpecker,resident
+Forest,redcro,Red Crossbill,breeding
+Forest,reevir1,Red-eyed Vireo,breeding
+Forest,refwar,Red-faced Warbler,breeding
+Forest,rehwoo,Red-headed Woodpecker,breeding
+Forest,rensap,Red-naped Sapsucker,breeding
+Forest,reshaw,Red-shouldered Hawk,breeding
+Forest,robgro,Rose-breasted Grosbeak,breeding
+Forest,rthhum,Ruby-throated Hummingbird,breeding
+Forest,ruckin,Ruby-crowned Kinglet,nonbreeding
+Forest,rufgro,Ruffed Grouse,resident
+Forest,rufhum,Rufous Hummingbird,breeding
+Forest,rusbla,Rusty Blackbird,nonbreeding
+Forest,scatan,Scarlet Tanager,breeding
+Forest,scoori,Scott's Oriole,breeding
+Forest,shshaw,Sharp-shinned Hawk,nonbreeding
+Forest,soogro1,Sooty Grouse,resident
+Forest,spotow,Spotted Towhee,breeding
+Forest,stejay,Steller's Jay,resident
+Forest,subfly,Sulphur-bellied Flycatcher,breeding
+Forest,sumtan,Summer Tanager,breeding
+Forest,swathr,Swainson's Thrush,breeding
+Forest,swawar,Swainson's Warbler,breeding
+Forest,swtkit,Swallow-tailed Kite,breeding
+Forest,tenwar,Tennessee Warbler,nonbreeding
+Forest,towsol,Townsend's Solitaire,breeding
+Forest,towwar,Townsend's Warbler,breeding
+Forest,tuftit,Tufted Titmouse,resident
+Forest,varthr,Varied Thrush,breeding
+Forest,vauswi,Vaux's Swift,breeding
+Forest,veery,Veery,breeding
+Forest,vigswa,Violet-green Swallow,breeding
+Forest,virwar,Virginia's Warbler,breeding
+Forest,warvir,Warbling Vireo,breeding
+Forest,wesblu,Western Bluebird,breeding
+Forest,westan,Western Tanager,breeding
+Forest,wewpew,Western Wood-Pewee,breeding
+Forest,whbnut,White-breasted Nuthatch,resident
+Forest,whevir,White-eyed Vireo,breeding
+Forest,whhwoo,White-headed Woodpecker,resident
+Forest,whtspa,White-throated Sparrow,nonbreeding
+Forest,whwcro,White-winged Crossbill,nonbreeding
+Forest,wilfly,Willow Flycatcher,breeding
+Forest,wilsap,Williamson's Sapsucker,breeding
+Forest,wiltur,Wild Turkey,resident
+Forest,winwre3,Winter Wren,breeding
+Forest,wlswar,Wilson's Warbler,breeding
+Forest,woewar1,Worm-eating Warbler,breeding
+Forest,wooscj2,Woodhouse's Scrub-Jay,resident
+Forest,woothr,Wood Thrush,breeding
+Forest,yebcha,Yellow-breasted Chat,breeding
+Forest,yebcuc,Yellow-billed Cuckoo,breeding
+Forest,yebfly,Yellow-bellied Flycatcher,nonbreeding
+Forest,yebmag,Yellow-billed Magpie,resident
+Forest,yebsap,Yellow-bellied Sapsucker,breeding
+Forest,yeejun,Yellow-eyed Junco,resident
+Forest,yelwar,Yellow Warbler,breeding
+Forest,yerwar,Yellow-rumped Warbler,nonbreeding
+Forest,yetvir,Yellow-throated Vireo,breeding
+Forest,yetwar,Yellow-throated Warbler,breeding
+Forest,zothaw,Zone-tailed Hawk,breeding
+Grassland,boboli,Bobolink,breeding
+Grassland,burowl,Burrowing Owl,breeding
+Grassland,casspa,Cassin's Sparrow,breeding
+Grassland,clcspa,Clay-colored Sparrow,breeding
+Grassland,dickci,Dickcissel,breeding
+Grassland,easkin,Eastern Kingbird,breeding
+Grassland,easmea,Eastern Meadowlark,breeding
+Grassland,ferhaw,Ferruginous Hawk,nonbreeding
+Grassland,graspa,Grasshopper Sparrow,breeding
+Grassland,henspa,Henslow's Sparrow,breeding
+Grassland,horlar,Horned Lark,nonbreeding
+Grassland,larspa,Lark Sparrow,breeding
+Grassland,lobcur,Long-billed Curlew,breeding
+Grassland,logshr,Loggerhead Shrike,breeding
+Grassland,savspa,Savannah Sparrow,nonbreeding
+Grassland,sctfly,Scissor-tailed Flycatcher,breeding
+Grassland,sedwre1,Sedge Wren,breeding
+Grassland,shtgro,Sharp-tailed Grouse,resident
+Grassland,swahaw,Swainson's Hawk,breeding
+Grassland,uplsan,Upland Sandpiper,breeding
+Grassland,vesspa,Vesper Sparrow,breeding
+Grassland,weskin,Western Kingbird,breeding
+Grassland,wesmea,Western Meadowlark,breeding
+Habitat Generalist,amecro,American Crow,breeding
+Habitat Generalist,amekes,American Kestrel,breeding
+Habitat Generalist,banswa,Bank Swallow,breeding
+Habitat Generalist,barswa,Barn Swallow,breeding
+Habitat Generalist,bkbmag1,Black-billed Magpie,resident
+Habitat Generalist,blkvul,Black Vulture,resident
+Habitat Generalist,bnhcow,Brown-headed Cowbird,breeding
+Habitat Generalist,brebla,Brewer's Blackbird,breeding
+Habitat Generalist,brnowl,American Barn Owl,resident
+Habitat Generalist,buggna,Blue-gray Gnatcatcher,breeding
+Habitat Generalist,cliswa,Cliff Swallow,breeding
+Habitat Generalist,comgra,Common Grackle,breeding
+Habitat Generalist,comnig,Common Nighthawk,breeding
+Habitat Generalist,comrav,Common Raven,resident
+Habitat Generalist,comyel,Common Yellowthroat,breeding
+Habitat Generalist,fiscro,Fish Crow,breeding
+Habitat Generalist,goleag,Golden Eagle,nonbreeding
+Habitat Generalist,grbani,Groove-billed Ani,breeding
+Habitat Generalist,grhowl,Great Horned Owl,resident
+Habitat Generalist,grtgra,Great-tailed Grackle,breeding
+Habitat Generalist,houfin,House Finch,resident
+Habitat Generalist,killde,Killdeer,breeding
+Habitat Generalist,merlin,Merlin,nonbreeding
+Habitat Generalist,moudov,Mourning Dove,breeding
+Habitat Generalist,neocor,Neotropic Cormorant,resident
+Habitat Generalist,norhar2,Northern Harrier,nonbreeding
+Habitat Generalist,normoc,Northern Mockingbird,breeding
+Habitat Generalist,nrwswa,Northern Rough-winged Swallow,breeding
+Habitat Generalist,perfal,Peregrine Falcon,breeding
+Habitat Generalist,purmar,Purple Martin,breeding
+Habitat Generalist,rethaw,Red-tailed Hawk,breeding
+Habitat Generalist,rewbla,Red-winged Blackbird,breeding
+Habitat Generalist,saypho,Say's Phoebe,breeding
+Habitat Generalist,sheowl,Short-eared Owl,nonbreeding
+Habitat Generalist,shthaw,Short-tailed Hawk,resident
+Habitat Generalist,sonspa,Song Sparrow,breeding
+Habitat Generalist,treswa,Tree Swallow,breeding
+Habitat Generalist,trokin,Tropical Kingbird,breeding
+Habitat Generalist,turvul,Turkey Vulture,breeding
+Habitat Generalist,whcspa,White-crowned Sparrow,nonbreeding
+Habitat Generalist,whtkit,White-tailed Kite,resident
+Wetlands & Coasts,ambduc,American Black Duck,nonbreeding
+Wetlands & Coasts,ameavo,American Avocet,breeding
+Wetlands & Coasts,amebit,American Bittern,breeding
+Wetlands & Coasts,amedip,American Dipper,resident
+Wetlands & Coasts,ameoys,American Oystercatcher,breeding
+Wetlands & Coasts,amewig,American Wigeon,nonbreeding
+Wetlands & Coasts,amwpel,American White Pelican,breeding
+Wetlands & Coasts,anhing,Anhinga,breeding
+Wetlands & Coasts,baleag,Bald Eagle,breeding
+Wetlands & Coasts,bargol,Barrow's Goldeneye,nonbreeding
+Wetlands & Coasts,bbwduc,Black-bellied Whistling-Duck,breeding
+Wetlands & Coasts,bcnher,Black-crowned Night Heron,breeding
+Wetlands & Coasts,belkin1,Belted Kingfisher,breeding
+Wetlands & Coasts,bknsti,Black-necked Stilt,breeding
+Wetlands & Coasts,blkoys,Black Oystercatcher,resident
+Wetlands & Coasts,blkpho,Black Phoebe,breeding
+Wetlands & Coasts,blkski,Black Skimmer,breeding
+Wetlands & Coasts,blkter,Black Tern,breeding
+Wetlands & Coasts,blktur,Black Turnstone,nonbreeding
+Wetlands & Coasts,bongul,Bonaparte's Gull,nonbreeding
+Wetlands & Coasts,botgra,Boat-tailed Grackle,resident
+Wetlands & Coasts,bracor,Brandt's Cormorant,resident
+Wetlands & Coasts,brnpel,Brown Pelican,breeding
+Wetlands & Coasts,buffle,Bufflehead,nonbreeding
+Wetlands & Coasts,buwtea,Blue-winged Teal,breeding
+Wetlands & Coasts,calgul,California Gull,breeding
+Wetlands & Coasts,cangoo,Canada Goose,breeding
+Wetlands & Coasts,canvas,Canvasback,nonbreeding
+Wetlands & Coasts,caster1,Caspian Tern,breeding
+Wetlands & Coasts,categr,Western/Eastern Cattle-Egret,breeding
+Wetlands & Coasts,cintea,Cinnamon Teal,breeding
+Wetlands & Coasts,clagre,Clark's Grebe,breeding
+Wetlands & Coasts,clarai11,Clapper Rail,breeding
+Wetlands & Coasts,comeid,Common Eider,nonbreeding
+Wetlands & Coasts,comgal1,Common Gallinule,breeding
+Wetlands & Coasts,comgol,Common Goldeneye,nonbreeding
+Wetlands & Coasts,comloo,Common Loon,nonbreeding
+Wetlands & Coasts,commer,Common Merganser,nonbreeding
+Wetlands & Coasts,doccor,Double-crested Cormorant,breeding
+Wetlands & Coasts,eleter1,Elegant Tern,breeding
+Wetlands & Coasts,forter,Forster's Tern,breeding
+Wetlands & Coasts,fragul,Franklin's Gull,breeding
+Wetlands & Coasts,fuwduc,Fulvous Whistling-Duck,breeding
+Wetlands & Coasts,gadwal,Gadwall,breeding
+Wetlands & Coasts,gbbgul,Great Black-backed Gull,resident
+Wetlands & Coasts,gloibi,Glossy Ibis,breeding
+Wetlands & Coasts,glwgul,Glaucous-winged Gull,nonbreeding
+Wetlands & Coasts,gnwtea,Green-winged Teal,nonbreeding
+Wetlands & Coasts,grbher3,Great Blue Heron,breeding
+Wetlands & Coasts,grecor,Great Cormorant,nonbreeding
+Wetlands & Coasts,greegr,Great Egret,breeding
+Wetlands & Coasts,grnher,Green Heron,breeding
+Wetlands & Coasts,grnkin,Green Kingfisher,resident
+Wetlands & Coasts,gubter1,Gull-billed/Australian Tern,breeding
+Wetlands & Coasts,heegul,Heermann's Gull,nonbreeding
+Wetlands & Coasts,hoomer,Hooded Merganser,nonbreeding
+Wetlands & Coasts,horgre,Horned Grebe,nonbreeding
+Wetlands & Coasts,kinrai4,King Rail,breeding
+Wetlands & Coasts,laugul,Laughing Gull,breeding
+Wetlands & Coasts,leabit,Least Bittern,breeding
+Wetlands & Coasts,leagre,Least Grebe,resident
+Wetlands & Coasts,leasan,Least Sandpiper,nonbreeding
+Wetlands & Coasts,leater1,Least Tern,breeding
+Wetlands & Coasts,lessca,Lesser Scaup,nonbreeding
+Wetlands & Coasts,libher,Little Blue Heron,breeding
+Wetlands & Coasts,limpki,Limpkin,resident
+Wetlands & Coasts,magfri,Magnificent Frigatebird,breeding
+Wetlands & Coasts,mallar3,Mallard,breeding
+Wetlands & Coasts,mancuc,Mangrove Cuckoo,resident
+Wetlands & Coasts,marmur,Marbled Murrelet,resident
+Wetlands & Coasts,marwre,Marsh Wren,breeding
+Wetlands & Coasts,mexduc,Mexican Duck,resident
+Wetlands & Coasts,motduc,Mottled Duck,resident
+Wetlands & Coasts,norpin,Northern Pintail,nonbreeding
+Wetlands & Coasts,norsho,Northern Shoveler,nonbreeding
+Wetlands & Coasts,osprey,Osprey,breeding
+Wetlands & Coasts,pelcor,Pelagic Cormorant,resident
+Wetlands & Coasts,pibgre,Pied-billed Grebe,breeding
+Wetlands & Coasts,piggui,Pigeon Guillemot,breeding
+Wetlands & Coasts,pipplo,Piping Plover,breeding
+Wetlands & Coasts,purgal2,Purple Gallinule,breeding
+Wetlands & Coasts,redegr,Reddish Egret,resident
+Wetlands & Coasts,redhea,Redhead,breeding
+Wetlands & Coasts,rengre,Red-necked Grebe,nonbreeding
+Wetlands & Coasts,ribgul,Ring-billed Gull,nonbreeding
+Wetlands & Coasts,rinduc,Ring-necked Duck,nonbreeding
+Wetlands & Coasts,rinkin1,Ringed Kingfisher,resident
+Wetlands & Coasts,rosspo1,Roseate Spoonbill,breeding
+Wetlands & Coasts,royter1,Royal Tern,breeding
+Wetlands & Coasts,rudduc,Ruddy Duck,breeding
+Wetlands & Coasts,sancra,Sandhill Crane,nonbreeding
+Wetlands & Coasts,santer1,Sandwich Tern,breeding
+Wetlands & Coasts,seaspa,Seaside Sparrow,breeding
+Wetlands & Coasts,shbdow,Short-billed Dowitcher,nonbreeding
+Wetlands & Coasts,snoegr,Snowy Egret,breeding
+Wetlands & Coasts,snoplo5,Snowy Plover,breeding
+Wetlands & Coasts,sora,Sora,breeding
+Wetlands & Coasts,sposan,Spotted Sandpiper,breeding
+Wetlands & Coasts,sstspa,Saltmarsh Sparrow,breeding
+Wetlands & Coasts,sursco,Surf Scoter,nonbreeding
+Wetlands & Coasts,swaspa,Swamp Sparrow,breeding
+Wetlands & Coasts,tribla,Tricolored Blackbird,resident
+Wetlands & Coasts,triher,Tricolored Heron,breeding
+Wetlands & Coasts,truswa,Trumpeter Swan,nonbreeding
+Wetlands & Coasts,virrai,Virginia Rail,breeding
+Wetlands & Coasts,wesgre,Western Grebe,breeding
+Wetlands & Coasts,wesgul,Western Gull,resident
+Wetlands & Coasts,whcpig2,White-crowned Pigeon,resident
+Wetlands & Coasts,whfibi,White-faced Ibis,breeding
+Wetlands & Coasts,whiibi,White Ibis,breeding
+Wetlands & Coasts,whwsco2,White-winged Scoter,nonbreeding
+Wetlands & Coasts,willet1,Willet,breeding
+Wetlands & Coasts,wilpha,Wilson's Phalarope,breeding
+Wetlands & Coasts,wilplo,Wilson's Plover,breeding
+Wetlands & Coasts,wilsni1,Wilson's Snipe,breeding
+Wetlands & Coasts,wooduc,Wood Duck,breeding
+Wetlands & Coasts,woosto,Wood Stork,breeding
+Wetlands & Coasts,y00475,American Coot,breeding
+Wetlands & Coasts,y00478,Iceland Gull,nonbreeding
+Wetlands & Coasts,ycnher,Yellow-crowned Night Heron,breeding
+Wetlands & Coasts,yehbla,Yellow-headed Blackbird,breeding
