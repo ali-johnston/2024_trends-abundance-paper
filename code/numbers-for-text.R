@@ -4,10 +4,6 @@ library(fs)
 
 data_dir <-  "data"
 
-# # species lookup
-species <- read_csv("data/master_species_list_495.csv", na = "") |>
-  select(species_code, breeding_biome)
-
 # trends estimates
 trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>

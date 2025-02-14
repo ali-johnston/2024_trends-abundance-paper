@@ -1,5 +1,6 @@
 data/
 outputs/
+figures/
 
 .Rproj.user
 .DS_Store

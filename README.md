@@ -34,9 +34,10 @@ The R scripts included in the `code/` directory of this repository reproduce the
 - `figure-S11_power-error_all-species.R`: generates plots showing the power and error versus both the trend magnitude and relative abundance for all species.
 - `figure-S12_power-error-histogram.R`: generates a histogram showing, for different levels of trend magnitude, what proportion of non-zero 27 km trends have directions that are correctly and incorrectly classified, respectively.
 - `figure-S13_rangewide-error.R`: generates a histogram showing the distribution of range-wide error across species.
-- `figure-S14-S15_range-edge.R`: generate plots showing the relationship between the trend estimates in 27 km cells and the distance of those cells to the species' range edge: a histogram of the slopes of the relationship for each species and the linear relationships by species grouped by biome. Depends on `bam_linear_analysis.R`.
+- `figure-S14-S15_bam-edge.R`: generate plots showing the relationship between the trend estimates in 27 km cells and the distance of those cells to the species' range edge: a histogram of the slopes of the relationship for each species and the linear relationships by species grouped by biome. Depends on `bam_linear_analysis.R`.
 - `figure-S16_compare-edge-abd.R`: based on the results of the BAM analysis, generates distributions of species-specific effect sizes for (a) distance to range edge and (b) relative abundance when both variables were included in the same model. Depends on `bam_linear_analysis.R`.
 - `numbers-for-text.R`: produces a variety of numbers that appear in the text of the paper.
+- `rangewide-trend-uncertainty.R`: estimate rangewide uncertainty in trends.
 
 ## Data
 
