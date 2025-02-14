@@ -17,21 +17,14 @@ dir_create(figures_dir)
 
 #########################################################
 ## load data
-
-# # species lookup
-species <- read_csv(path(data_dir, "/master_species_list_495.csv"), na = "",
-                    show_col_types = FALSE) |>
-  select(species_code, common_name, breeding_biome)
-
 trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
   mutate(log10_abd = log10(abd),
          weight = 1 / abd_ppy_var) |>
-  mutate(log10_distance_to_edge_km = log10(distance_to_edge_km)) |>
-         # breeding_biome = factor(breeding_biome),
-         # species_code = factor(species_code),
-  left_join(species, by = "species_code")
-
+  mutate(log10_distance_to_edge_km = log10(distance_to_edge_km))
+# ebird taxonomy
+species <- auk::get_ebird_taxonomy(2022) |> 
+  select(species_code, common_name)
 # minimum and maximum abundance for each species and each biome
 abd_range <- trends |>
   dplyr::select(species_code, breeding_biome, abd) |>

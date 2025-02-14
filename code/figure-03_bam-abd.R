@@ -227,8 +227,8 @@ cbind(biomes, diff10)
 
 focal_species <- c("rufhum", "balori")
 
-species_names <- path(data_dir, "master_species_list_495.csv") |>
-  read_csv() |>
+species_names <- auk::get_ebird_taxonomy(2022) |> 
+  select(species_code, common_name) |>
   filter(species_code %in% focal_species)
 
 for(i in 1:nrow(species_names)){
