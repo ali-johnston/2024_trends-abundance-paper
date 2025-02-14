@@ -34,7 +34,7 @@ by_species <- trends |>
 # boxplot ----
 
 plot_loc <- path(figures_dir, paste0("figure-S02_boxplot.tif"))
-tiff(plot_loc, width = 8, height = 8, units = "cm", pointsize = 9, res = 600)
+tiff(plot_loc, width = 8, height = 8, units = "cm", pointsize = 7, res = 600)
 par(mar = c(5, 5, 3, 3))
 
 boxplot(prop_dec ~ wt_trend_cat, data = by_species, 
@@ -42,6 +42,10 @@ boxplot(prop_dec ~ wt_trend_cat, data = by_species,
         xlab = "Range wide trend", ylab = "Proportion of range with declines")
 axis(side = 2, at = c(0, 0.5, 1), ylab = "Proportion of range with declines")
 axis(side = 1, at = seq(0.5, 14.5, by = 1), labels = c(-10:4))
+
+rect(xleft = 6.5, xright = 12.5, ybottom = -0.5, ytop = 1.5,
+     col = rgb(1, 0, 0, alpha = 0.2), border = NA)  
+
 abline(v = 10.5, col = "red")
 
 dev.off()

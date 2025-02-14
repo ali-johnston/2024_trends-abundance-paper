@@ -68,7 +68,7 @@ g <- ggplot(trends_rw_folds, aes(x = metric)) +
   xlab(NULL)
 ggsave(path(figures_dir, "figure-S03_proportion-cells_density-plot.png"), g,
        width = 7, height = 8, bg = "white")
-ggsave(path(figures_dir, "figure-S03_proportion-cells_density-plot.tiff"), g,
+ggsave(path(figures_dir, "figure-S03_proportion-cells_density-plot.tif"), g,
        width = 7, height = 8, bg = "white")
 
 
@@ -100,5 +100,5 @@ g <- ggplot(trends_rw_folds |>
   xlab(NULL)
 ggsave(path(figures_dir, "figure-S04_proportion-cells_density-plot_by-season.png"), g,
        width = 7, height = 8, bg = "white")
-ggsave(path(figures_dir, "figure-S04_proportion-cells_density-plot_by-season.tiff"), g,
+ggsave(path(figures_dir, "figure-S04_proportion-cells_density-plot_by-season.tif"), g,
        width = 7, height = 8, bg = "white")

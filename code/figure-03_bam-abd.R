@@ -78,11 +78,9 @@ ggplot(spec_coef, aes(x = est, fill = sig_fac)) +
   xlab("Linear model slope") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-plot_loc <- path(figures_dir,
-                 paste0("figure-03a_bam-linear-slope_histogram_", mod_tag, ".png"))
+plot_loc <- path(figures_dir, "figure-03a_bam-linear-slope_histogram.png")
 ggsave(plot_loc, width = 14, height = 10, units = "cm")
-plot_loc <- path(figures_dir,
-                 paste0("figure-03a_bam-linear-slope_histogram_", mod_tag, ".tif"))
+plot_loc <- path(figures_dir, "figure-03a_bam-linear-slope_histogram.tif")
 ggsave(plot_loc, width = 14, height = 10, units = "cm")
 
 
