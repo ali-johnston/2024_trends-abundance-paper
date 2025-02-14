@@ -9,17 +9,12 @@ outputs_dir <- "outputs"
 figures_dir <- path("figures", "figure-S14-S15")
 dir_create(figures_dir)
 
+
 # load data ----
 
-# species lookup
-species <- path(data_dir, "master_species_list_495.csv") |>
-  read_csv(na = "") |>
-  select(species_code, breeding_biome)
-
 # trends estimates
-trends <- path(data_dir, "ebird-trends_2021_weights.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
-  left_join(species, by = "species_code") |>
   mutate(log_abd = log10(abd),
          log_distance_to_edge_km = log10(distance_to_edge_km),
          breeding_biome = factor(breeding_biome),
@@ -51,9 +46,8 @@ spec_coef <- read_csv(results_loc1) |>
   mutate(sig = ifelse(p_val < 0.05, "s", "ns")) |>
   mutate(sig_fac = factor(sig, levels = c("s", "ns"), ordered = TRUE)) |>
   rename(species_code = species_code...5) |>
-  left_join(species, by = "species_code") |>
   dplyr::select(-species_code...10) |>
-  merge(dplyr::select(dist_range, -breeding_biome), by = "species_code") |>
+  merge(dist_range, by = "species_code") |>
   mutate(effect_size = est*(max_log_dist - min_log_dist)) |>
   mutate(intercept0 = int_est + est*min_log_dist) |>
   mutate(intercept0.5 = int_est + est*mean(c(min_log_dist, max_log_dist)))
@@ -83,11 +77,10 @@ ggplot(spec_coef, aes(x = est, fill = sig_fac)) +
   xlab("Linear model slope") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-plot_loc <- path(figures_dir, "figure-S14_linear-model_slope-histogram.png")
-ggsave(plot_loc, width = 14, height = 10, units = "cm")
-
-plot_loc <- path(figures_dir, "figure-S14_linear-model_slope-histogram.tif")
-ggsave(plot_loc, width = 14, height = 10, units = "cm")
+ggsave(path(figures_dir, "figure-S14_linear-model_slope-histogram.png"),
+       width = 14, height = 10, units = "cm")
+ggsave(path(figures_dir, "figure-S14_linear-model_slope-histogram.tif"),
+       width = 14, height = 10, units = "cm")
 
 
 # figure S15: trend vs. distance to edge relationships from random effects ----
@@ -125,8 +118,8 @@ plot_multi <- function(data, col = alpha("black", 0.1)){
 biomes <- names(table(spec_coef$breeding_biome))
 biome_names_tidy <- c("Arctic tundra", "Aridland", "Forest",
                       "Grassland", "Habitat generalists", "Wetland & Coast")
-plot_loc <- path(figures_dir, "figure-S15_linear-model_slopes.tif")
-tiff(plot_loc, width = 14, height = 10, units = "cm", pointsize = 9, res = 600)
+tiff(path(figures_dir, "figure-S15_linear-model_slopes.tif"),
+     width = 14, height = 10, units = "cm", pointsize = 9, res = 600)
 
 par(mfrow=c(2, 3), mar = c(0.5, 0.5, 0.5, 0.5), oma = c(5,5,2,0))
 biomes <- names(table(spec_coef$breeding_biome))

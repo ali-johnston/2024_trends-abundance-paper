@@ -12,7 +12,7 @@ dir_create(figures_dir)
 # load data ----
 
 # trends estimates
-trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
   mutate(log_abd = log10(abd),
          breeding_biome = factor(breeding_biome),

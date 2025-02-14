@@ -23,7 +23,7 @@ species <- read_csv(path(data_dir, "/master_species_list_495.csv"), na = "",
                     show_col_types = FALSE) |>
   select(species_code, common_name, breeding_biome)
 
-trends <- path(data_dir, "ebird-trends_2021_weights.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
   mutate(log10_abd = log10(abd),
          weight = 1 / abd_ppy_var) |>

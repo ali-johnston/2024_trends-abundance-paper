@@ -11,12 +11,12 @@ dir_create(figures_dir)
 # load data ----
 
 # bcr lookup
-bcr_lookup <- path(data_dir, "bcr-srd-lookup.csv") |>
-  read_csv() |>
+bcr_lookup <- path(data_dir, "bcr-srd-lookup.parquet") |>
+  read_parquet() |>
   filter(coverage_fraction > 0.5)
 
 # trends estimates
-trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
   inner_join(bcr_lookup, by = join_by("srd_id")) |>
   dplyr::select(species_code, abd_ppy_median, region_code)

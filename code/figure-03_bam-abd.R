@@ -16,7 +16,7 @@ species <- read_csv(path(data_dir, "master_species_list_495.csv"), na = "") |>
   select(species_code, breeding_biome)
 
 # trends estimates
-trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
   mutate(log_abd = log10(abd),
          #         log_distance_to_edge_km = log10(distance_to_edge_km),

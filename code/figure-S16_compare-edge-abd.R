@@ -13,16 +13,9 @@ dir_create(figures_dir)
 
 # load data ----
 
-# species lookup
-species <- path(data_dir, "master_species_list_495.csv") |>
-  read_csv(na = "") |>
-  select(species_code, breeding_biome)
-
-
 # trends estimates
-trends <- path(data_dir, "ebird-trends_2021_weights.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
-  left_join(species, by = join_by(species_code)) |>
   mutate(log10_abd = log10(abd),
          log10_distance_to_edge_km = log10(distance_to_edge_km),
          breeding_biome = factor(breeding_biome),
@@ -63,9 +56,8 @@ spec_coef_abd <- read_csv(results_loc1) |>
   mutate(sig = ifelse(p_val < 0.05, "s", "ns")) |>
   mutate(sig_fac = factor(sig, levels = c("s", "ns"), ordered = TRUE)) |>
   rename(species_code = species_code...5) |>
-  left_join(species, by = "species_code") |>
   dplyr::select(-species_code...10) |>
-  merge(dplyr::select(abd_range, -breeding_biome), by = "species_code") |>
+  merge(abd_range, by = "species_code") |>
   mutate(effect_size = est*(max_log_abd - min_log_abd)) |>
   dplyr::select(species_code, effect_size) |>
   rename(pred_diff_abd = effect_size)
@@ -88,9 +80,8 @@ spec_coef_edge <- read_csv(results_loc1) |>
   mutate(sig = ifelse(p_val < 0.05, "s", "ns")) |>
   mutate(sig_fac = factor(sig, levels = c("s", "ns"), ordered = TRUE)) |>
   rename(species_code = species_code...5) |>
-  left_join(species, by = "species_code") |>
   dplyr::select(-species_code...10) |>
-  merge(dplyr::select(dist_range, -breeding_biome), by = "species_code") |>
+  merge(dist_range, by = "species_code") |>
   mutate(effect_size = est*(max_log_dist - min_log_dist)) |>
   dplyr::select(species_code, effect_size) |>
   rename(pred_diff_edge = effect_size)
@@ -106,8 +97,8 @@ h1 <- hist(pred_compare$pred_diff_edge, breaks = br, plot = FALSE)
 h2 <- hist(pred_compare$pred_diff_abd, breaks = br, plot = FALSE)
 mc <- max(h1$counts, h2$counts)
 
-plot_loc <- path(figures_dir, "figure-S16_effect-size-edge-abd.tif")
-tiff(plot_loc, width = 12, height = 12, units = "cm", pointsize = 9, res = 600)
+tiff(path(figures_dir, "figure-S16_effect-size-edge-abd.tif"),
+     width = 12, height = 12, units = "cm", pointsize = 9, res = 600)
 
 par(mfrow = c(2,1), mar = c(1, 5, 0.5, 0.5), oma = c(4, 0, 0, 0))
 
@@ -267,9 +258,8 @@ aic_sig_cross <- read_csv(results_loc1) |>
   mutate(sig = ifelse(p_val < 0.05, "s", "ns")) |>
   mutate(sig_fac = factor(sig, levels = c("s", "ns"), ordered = TRUE)) |>
   rename(species_code = species_code...5) |>
-  left_join(species, by = "species_code") |>
   dplyr::select(-species_code...10) |>
-  merge(dplyr::select(abd_range, -breeding_biome), by = "species_code") |>
+  merge(abd_range, by = "species_code") |>
   mutate(effect_size = est*(max_log_abd - min_log_abd)) |>
   dplyr::select(species_code, effect_size, sig, sig_fac) |>
   rename(pred_diff_abd = effect_size) |>

@@ -19,12 +19,11 @@ figures_dir <- path("figures", "figure-04")
 dir_create(figures_dir)
 
 # read in trends estimates with breeding biomes and srd information
-trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet()
 
 # srd <- path(data_dir, "srd_27km_year.parquet") |>
-srd <- path(data_dir, "srd_27km.parquet") |>
-  read_parquet()
+srd <- distinct(trends, srd_id, latitude, longitude)
 
 # map plotting set-up
 # focal region

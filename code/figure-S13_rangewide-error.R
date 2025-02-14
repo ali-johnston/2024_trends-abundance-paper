@@ -10,7 +10,7 @@ figures_dir <- path("figures", "figure-S13")
 dir_create(figures_dir)
 
 # power & error calculated as trend magnitude
-D <- path(data_dir, "ebird-trends_2021_weights.parquet") |>
+D <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet()
 n_species <- length(unique(D$species_code))
 

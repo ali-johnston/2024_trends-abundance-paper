@@ -40,3 +40,82 @@ The R scripts included in the `code/` directory of this repository reproduce the
 
 ## Data
 
+The datasets required to run the above scripts are in the `data/` directory. They are primarily tabular data in either CSV or Parquet format (Parquet files can be read into R using the `arrow` R package), and there is a single GeoPackage containing spatial data. The datasets and associated columns are as follows
+
+**`master_species_list_495.csv`:** a list of all 495 species included in the study, with one row per species
+- `species_code`: 6-letter eBird species code.
+- `common_name`: English common name.
+- `family`: Latin name of family.
+- `breeding_biome`: breeding biome of the species.
+- `season`: season for which the trend was estimated.
+- `start_date/end_date`: dates defining the season boundaries.
+
+**`ebird-trends_2007-2021.parquet:** trends estimates for all species 27 km resolution for the 2007-2021 time period. In addition to the trends, a set of species-specific simulation-based metrics capturing the ability of the model to correctly classify trends is included. These metrics are estimated across a suite of simulation scenarios for each grid cell grouped into bins according to trend magnitude.
+- `species_code`: 6-letter eBird species code.
+- `season`: season for which the trend was estimated.
+- `breeding_biome/breeding_biome_label`: breeding biome of species.
+- `srd_id`: unique integer ID for each 27 km grid cell.
+- `longitude/latitude`: coordinates of 27 km grid cell centers.
+- `abd`: relative abundance estimates for 2014, the midpoint of the 2007-2021 time period.
+- `abd_ppy_median`: median percent per year trend in relative abundance. Note these are percentages expressed out of 100, e.g. a value of 5 expresses a 5% change in relative abundance per year.
+- `abd_ppy_{lower/lower}`: the 10th and 90th percentile of percent per year trend in relative abundance.
+- `abd_ppy_{sd/var}`: the variance and standard deviation of trend estimates based on a ensemble of 100 folds.
+- `distance_to_edge_km`: distance between the grid cell and the range edge.
+- `directional_power`: simulation based estimate of the proportion of trends estimates that are non-zero and correctly classify the trend direction.
+- `directional_error_nz`: simulation based estimate of the proportion of non-zero trends estimates that incorrectly classify the trend direction.
+- `bin_{min/max}`: trend magnitude bin boundaries over which the error and power metrics are estimated.
+
+**`ebird-trends_abd-binned-performance_2021.parquet:** simulation-based power and error estimates for each species, grouped by relative abundances binned using ten equally spaced quantiles.
+- `species_code`: 6-letter eBird species code.
+- `season`: season for which the trend was estimated.
+- `abd_bin_midpoint`: mid-point of the relative abundance bin.
+- `n_nonzero`: number of non-zero trend estimates.
+- `prop_nonzero`: proportion of trend estimates that are non-zero.
+- `directional_power`: proportion of trends that are both non-zero and correctly classify the trend direction.
+- `directional_error`: proportion of trends that are both non-zero and incorrectly classify the trend direction.
+- `directional_power_nz`: proportion of non-zero trends that correctly classify the trend direction.
+- `directional_error_nz`: proportion of non-zero trends that incorrectly classify the trend direction.
+
+**`ebird-trends_ppy-binned-performance_2021.parquet:** simulation-based power and error estimates for each species, grouped into half percent trend magnitude bins.
+- `species_code`: 6-letter eBird species code.
+- `season`: season for which the trend was estimated.
+- `ppy_bin_midpoint`: mid-point of the trend magnitude bins.
+- `n_nonzero`: number of non-zero trend estimates.
+- `prop_nonzero`: proportion of trend estimates that are non-zero.
+- `directional_power`: proportion of trends that are both non-zero and correctly classify the trend direction.
+- `directional_error`: proportion of trends that are both non-zero and incorrectly classify the trend direction.
+- `directional_power_nz`: proportion of non-zero trends that correctly classify the trend direction.
+- `directional_error_nz`: proportion of non-zero trends that incorrectly classify the trend direction.
+
+**`ebird-trends_range-wide_folds_2021.parquet:** range-wide trend estimates for each of the 100 folds that make up the ensemble.
+- `species_code`: 6-letter eBird species code.
+- `season`: season for which the trend was estimated.
+- `breeding_biome`: breeding biome of species.
+- `fold`: integer indicating the fold number.
+- `n_cells`: number of 27 km cells within the range.
+- `abd_ppy`: abundance-weighted mean rangewide percent per year trend.
+- `prop_decline_range`: proportion of 27 km cells with declining trends within range.
+
+**`ebird-trends_simulations_focal-species_2021.parquet:** simulation results for a subset of four species: Hermit Thrush, Hooded Warbler, Redhead, and Snow Goose.
+- `species_code`: 6-letter eBird species code.
+- `season`: season for which the trend was estimated.
+- `scenario_id`: unique integer ID for each simulation scenario (1-10).
+- `realization`: each simulation scenario is repeated for 10 realization, this integer identifies the realization.
+- `srd_id`: unique integer ID for each 27 km grid cell.
+- `simulated`: simulated trend.
+- `estimated`: median model estimated trend.
+- `lower`: 10th percentile of model estimated trends.
+- `upper`: 90th percentile of model estimated trends.
+- `nonzero`: whether the confidence intervals overlap zero.
+
+**`bcr-srd-lookup.parquet:** lookup table identifying which Bird Conservation Region (BCR) each 27 km grid cell falls into.
+- `region_code`: unique ID for each BCR.
+- `srd_id`: unique integer ID for each 27 km grid cell.
+- `coverage_fraction`: proprtion of the 27 km grid cell covered by the BCR.
+
+**`basemap.gpkg:** spatial data for creating basemaps in the mapping scripts. All data come from the [Natural Earth](https://www.naturalearthdata.com/) project. Layers included are:
+- `land`: land boundary polygon.
+- `country_lines`: country boundary lines.
+- `state_lines`: state boundary lines.s
+- `lakes`: lake polygons.
+- `global_bb`: global boundary polygon.

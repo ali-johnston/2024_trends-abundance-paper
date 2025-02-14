@@ -19,7 +19,7 @@ figures_dir <- path("figures", "figure-02")
 dir_create(figures_dir)
 
 # read in trends estimates with breeding biomes and srd information
-trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet()
 
 # trend quantiles across the whole range

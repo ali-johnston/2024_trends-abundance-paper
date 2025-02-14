@@ -13,7 +13,7 @@ dir_create(figures_dir)
 # load data ----
 
 # directional error,focal species, trend bins
-abd <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+abd <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
   distinct(species_code, season, srd_id, abd)
 trends <- path(data_dir, "ebird-trends_simulations_focal-species_2021.parquet") |>

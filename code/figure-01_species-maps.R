@@ -18,7 +18,7 @@ figures_dir <- path("figures", "figure-01")
 dir_create(figures_dir)
 
 # read in trends estimates with breeding biomes and srd information
-trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet()
 
 # focal region
@@ -48,9 +48,8 @@ line_col <- "#888888"
 line_width <- 2.5
 
 # srd cells within each bcr
-bcr_lookup <- path(data_dir, "summary-regions_srd-lookup.parquet") |>
-  read_parquet() |>
-  filter(str_starts(region_code, "BCR"))
+bcr_lookup <- path(data_dir, "bcr-srd-lookup.parquet") |>
+  read_parquet()
 bcr_srd <- bcr_lookup |>
   group_by(srd_id) |>
   top_n(n = 1, wt = coverage_fraction) |>

@@ -9,7 +9,7 @@ species <- read_csv("data/master_species_list_495.csv", na = "") |>
   select(species_code, breeding_biome)
 
 # trends estimates
-trends <- path(data_dir, "ebird-trends_2021_srd-biomes.parquet") |>
+trends <- path(data_dir, "ebird-trends_2007-2021.parquet") |>
   read_parquet() |>
   dplyr::select(species_code, abd, abd_ppy_median)
 
