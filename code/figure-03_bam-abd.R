@@ -42,6 +42,12 @@ mod_tag <- "log10_abd_40_run2"
 results_loc1 <- path(outputs_dir, paste0("species_coefs_bam_linear_", mod_tag, ".csv"))
 results_loc2 <- path(outputs_dir, paste0("species_coefs_lm_linear_", mod_tag, ".csv"))
 
+ppy_to_multiyr <- function(ppy, noyrs = 10){
+  ppy_multiyr <- 100*(((100 + ppy)/100)^noyrs) - 100
+  return(ppy_multiyr)
+}
+
+
 spec_coef <- read_csv(results_loc1) |>
   bind_rows(read_csv(results_loc2)) |>
   mutate(sig = ifelse(p_val < 0.05, "s", "ns")) |>
@@ -52,7 +58,13 @@ spec_coef <- read_csv(results_loc1) |>
   merge(dplyr::select(abd_range, -breeding_biome), by = "species_code") |>
   mutate(effect_size = est*(max_log_abd - min_log_abd)) |>
   mutate(intercept0 = int_est + est*min_log_abd) |>
-  mutate(intercept0.5 = int_est + est*mean(c(min_log_abd, max_log_abd)))
+  mutate(intercept0.5 = int_est + est*mean(c(min_log_abd, max_log_abd))) |>
+  mutate(ppy_min_log_abd = int_est + est*min_log_abd) |>
+  mutate(ppy_max_log_abd = int_est + est*max_log_abd) |>
+  mutate(multiyr_min_log_abd = ppy_to_multiyr(ppy_min_log_abd)) |>
+  mutate(multiyr_max_log_abd = ppy_to_multiyr(ppy_max_log_abd)) |>
+  mutate(effect_size_mutliyr = multiyr_max_log_abd - multiyr_min_log_abd)
+
 
 ## mean effect sizes per biome
 biome_coef <- spec_coef |>
@@ -103,53 +115,6 @@ sum(spec_coef$direction == "neg" & spec_coef$sig_fac == "s") / nrow(spec_coef)
 # [1] 0.7267206
 
 
-# figure 3b: trend vs. abundance relationship ----
-
-nu <- function(x){as.numeric(as.character(x))}
-plot_1_line <- function(data, col = alpha("black", 0.1), ...) {
-  x <- seq(0, 1, by = 0.1)
-  x2 <- seq(data$min_log_abd[1], data$max_log_abd[1], length.out = 11)
-  lines(x, x2*data$est + data$int_est, col = col, ...)
-}
-plot_multi <- function(data, col = alpha("black", 0.1)){
-  for(i in 1:nrow(data)){
-    plot_1_line(data[i,], col = col)
-  }
-}
-
-
-# change breeding biome names to match paper
-biomes <- names(table(spec_coef$breeding_biome))
-biome_names_tidy <- c("Arctic tundra", "Aridland", "Forest",
-                      "Grassland", "Habitat generalists", "Wetland & Coast")
-
-plot_loc <- path(figures_dir, paste0("figure-03b_bam-linea-slopes_", mod_tag, ".png"))
-png(plot_loc, width = 14, height = 10, units = "cm", pointsize = 9, res = 600)
-
-par(mfrow=c(2, 3), mar = c(0.5, 0.5, 0.5, 0.5), oma = c(5,5,2,0))
-
-for (i in 1:length(biomes)) {
-  ylabel <- ifelse(i %in% c(1, 4), "Population trend", "")
-  plot(0, 0, col = "white", ylim = c(-12, 12), xlim = c(0, 1),
-       main = "", xaxt = "n", xlab = "", yaxt = "n", ylab = ylabel,
-       xpd = NA, cex.lab = 1.5, las = 1)
-  if(i %in% c(1,4)) axis(side = 2, at = c(-10, 0, 10), cex.axis = 1.5, las = 1)
-  if(i > 3) axis(side = 1, at = c(0, 1), labels = c("0", "max"), cex.axis = 1.5, las = 1)
-  abline(h = 0, col = alpha("firebrick", 0.42), lwd = 2)
-  
-  # lines for each species in the biome
-  plot_multi(filter(spec_coef, breeding_biome == biomes[i]))
-  
-  if(i == 5) text(x = 0.5, y = -20,
-                  labels = "Relative abundance within species", xpd = NA, cex = 1.5)
-  text(x = 0, y = 11, pos = 4, labels = biome_names_tidy[i], cex = 1.5)
-  
-  # add average biome line
-  biome_avg <- biome_coef |> filter(breeding_biome == biomes[i])
-  plot_1_line(biome_avg, col = "black", lwd = 2)
-}
-
-dev.off()
 
 
 #########################################################
@@ -188,6 +153,82 @@ spec_coef |>
 # 4 Wetlands & Coasts    0.680   0.836
 # 5 Aridlands            0.789   0.868
 # 6 Grassland            0.913   0.957
+
+
+#########################################################
+## 
+# figure 10-year cumulative population change with abundance, 
+# plotted by biome. 
+
+
+nu <- function(x){as.numeric(as.character(x))}
+plot_1spec_line_multiyr <- function(data, col = alpha("black", 0.1), no_years = 10, plot = TRUE, ...){
+  x <- seq(0, 1, by = 0.004)
+  x2 <- seq(data$min_log_abd[1], data$max_log_abd[1], length.out = length(x))
+  tr_1yr <- x2*data$est + data$int_est
+  tr_multiyr <- ppy_to_multiyr(tr_1yr, noyrs = no_years)
+  if(plot) lines(x, tr_multiyr, col = col, ...)
+  if(!plot) return(data.frame(x, tr_multiyr))
+}
+
+plot_multispec_multiyr <- function(data, col = alpha("black", 0.1), no_years = 10){
+  for(i in 1:nrow(data)){
+    plot_1spec_line_multiyr(data[i,], col = col, no_years = no_years)
+  }
+}
+
+
+no_yrs <- 10
+ylim <- 60
+ytick <- 50
+
+
+# change breeding biome names to match paper
+biomes <- names(table(spec_coef$breeding_biome))
+biome_names_tidy <- c("Arctic tundra", "Aridland", "Forest",
+      "Grassland", "Habitat generalists", "Wetland & Coast")
+
+
+plot_loc <- path(figures_dir, paste0("figure-03b_bam-linear-slopes_", mod_tag, ".png"))
+png(plot_loc, width = 14.4, height = 10, units = "cm", pointsize = 9, res = 600)
+
+par(mfrow=c(2, 3), mar = c(0.5, 0.5, 0.5, 0.5), oma = c(5,6,2,0))
+
+
+for(i in 1:length(biomes)) {
+  ylabel <- paste("Population change over", no_yrs, "years (percent)")
+  plot(0, 0, col = "white", ylim = ylim*c(-1, 1), xlim = c(0, 1),
+       main = "", xaxt = "n", xlab = "", yaxt = "n", ylab = "",
+       xpd = NA, cex.lab = 1.5, las = 1)
+  if(i %in% c(1,4)) axis(side = 2, at = ytick * c(-1, 0, 1), cex.axis = 1.5, las = 1)
+  if(i == 4) text(x = -0.3, y = 1.1*ylim, label = ylabel, cex = 1.5, xpd = NA, srt = 90)
+  if(i > 3) axis(side = 1, at = c(0, 1), labels = c("0", "max"), cex.axis = 1.5, las = 1)
+  abline(h = 0, col = alpha("firebrick", 0.42), lwd = 2)
+
+  # lines for each species in the biome
+  plot_multispec_multiyr(filter(spec_coef, breeding_biome == biomes[i]), no_years = no_yrs)
+
+  if(i == 5) text(x = 0.5, y = -1.66*ylim,
+                  labels = "Relative abundance within species", xpd = NA, cex = 1.5)
+  text(x = -0.03, y = 11/12*ylim, pos = 4, labels = biome_names_tidy[i], cex = 1.5)
+
+  # add average biome line
+  biome_avg <- biome_coef |> filter(breeding_biome == biomes[i])
+  plot_1spec_line_multiyr(biome_avg, col = "black", lwd = 2, no_years = no_yrs)
+}
+
+dev.off()
+
+
+diff10 <- vector(length = length(biomes))
+
+for(i in 1:6){
+  biome_avg <- biome_coef |> filter(breeding_biome == biomes[i])
+  pred10 <- plot_1spec_line_multiyr(biome_avg, col = "black", lwd = 2, no_years = no_yrs, plot = FALSE)
+  diff10[i] <- pred10$tr_multiyr[nrow(pred10)] - pred10$tr_multiyr[1]
+}
+
+cbind(biomes, diff10)
 
 
 #########################################################
