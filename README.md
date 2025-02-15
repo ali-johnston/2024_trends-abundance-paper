@@ -1,9 +1,5 @@
 This repository contains code and data for _North American bird declines are greatest where species are most abundant_ (Johnston et al. 2025).
 
-## Abstract
-
-Efforts to address declines of North American birds have been constrained by limited availability of fine-scale information about population change. Using participatory science data from eBird, we estimated continental population change and relative abundance at 27 km resolution for 495 bird species from 2007-2021. Results reveal high and previously undetected spatial heterogeneity in trends; although 75% of species were declining, 97% of species showed separate areas of significantly increasing and decreasing populations. Populations tended to decline most steeply in strongholds where species were most abundant, yet they fared better where species were least abundant. These high-resolution trends improve our ability to understand population dynamics, prioritize recovery efforts, and guide conservation at a time when action is urgently needed.
-
 ## Setup
 
 To install all necessary packages to run the R scripts in the `code/` directory, run the following
@@ -24,7 +20,7 @@ The R scripts included in the `code/` directory of this repository reproduce the
 
 - `figure-01_species-maps.R`: generates trend maps for Great Blue Heron, Wood Duck, and House Wren aggregated to three different spatial scales: range-wide, regional (Bird Conservation Region), and landscape scales (27 km × 27 km grid cells).
 - `figure-02_fishbone.R`: generates a bar plot showing the minimum, maximum, median, and interquartile range of 27 km trend estimates for each of the 495 species in the study.
-- `bam_linear_analysis.R`: Ali to provide a brief description of what this script does. This script generates a set of CSVs that are required by several of the subsequent scripts, therefore, it should be run prior to running the scripts used to generate Figures 3 and S14-S16.
+- `bam_linear_analysis.R`: This runs the linear models for each species relating trend to abundance. It uses the 'bam' function in mgcv to include a Gaussian Process to account for spatial autocorrelation. The code in here automatically searches through candidate scales of the spatial correlation and selects an optimal one to use for a final model. See the paper for further details. This script generates a set of CSVs that are required by several of the subsequent scripts, therefore, it should be run prior to running the scripts used to generate Figures 3 and S14-S16.
 - `figure-03_bam-abd.R`: Ali to provide a brief description of what this script does. Depends on `bam_linear_analysis.R`.
 - `figure-04_community-maps.R`: generates community-level trend maps showing the mean trend across species breeding in six different biomes.
 - `figure-S01_variation-within-biome.R`: generates a histogram showing the distribution of the range of 27 km trend estimates within each BCR-species combination.
@@ -41,7 +37,7 @@ The R scripts included in the `code/` directory of this repository reproduce the
 
 ## Data
 
-The datasets required to run the above scripts are in the `data/` directory. They are primarily tabular data in either CSV or Parquet format (Parquet files can be read into R using the `arrow` R package), and there is a single GeoPackage containing spatial data. The datasets and associated columns are as follows
+The datasets required to run the above scripts should be located in a `data/` directory within the project. These are all available at a Dryad repository referenced in the published paper. They are primarily tabular data in either CSV or Parquet format (Parquet files can be read into R using the `arrow` R package), and there is a single GeoPackage containing spatial data. The datasets and associated columns are as follows
 
 **`trends-season-dates.csv`:** a list of all 495 species included in the study.
 - `species_code`: 6-letter eBird species code.
