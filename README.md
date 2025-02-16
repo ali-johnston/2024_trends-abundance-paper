@@ -4,15 +4,19 @@ This repository contains code and data for _North American bird declines are gre
 
 Efforts to address declines of North American birds have been constrained by limited availability of fine-scale information about population change. This archive accompanies a paper that describes the use of data from the participatory science project eBird to estimate continental population change and relative abundance at 27 km resolution for 495 bird species from 2007-2021. The archived materials, divided across Dryad and Zenodo, are composed of all data and R code that are necessary to conduct the analyses and produce the figures from this paper. The README.md file for this archive, which is part of the Dryad component of the archive, describes each of the R scripts and data files contained within the archive.
 
+## Content
+
+The full archive is split between Dryad and Zenodo, with the archive containing data split between Dryad and Zenodo; the Zenodo components of the data cannot be archived in Dryad because they inherit open-access non-CC-0 licenses that are not allowed in Dryad archives. All computer code as also archive in Zenodo. In order to use the combined data and code, one must download the Dryad and Zenodo components and place them in the same directory. R must be installed on this computer, with RStudio being optionally. This read-me file first provides additional details about setting up a computer to run the archived code, followed by descriptions of the purposes of all of the R scripts, and finally a list of all of the data files that includes a description of the contents of each data file.
+
 ## Setup
 
-To install all necessary packages to run the R scripts in the `code/` directory, run the following
+To install all necessary packages to run the R scripts in the `code/` directory, run the following line of code in R:
 
 ```         
 install.packages(readLines("requirements.txt"))
 ```
 
-All R scripts in `code/` assume that the working directory is the top-level project directory, i.e. the one containing this README file. If you are using RStudio, open the `.Rproj` file and your working directory will be set correctly. If you're not using RStudio, you can set your working directory manually, e.g. using
+All R scripts in `code/` assume that the working directory is the top-level project directory, i.e. the one containing this README file. If you are using RStudio, open the `.Rproj` file and your working directory will be set correctly. If you're not using RStudio, you can set your working directory manually, e.g. by running the following code in your R session
 
 ```         
 setwd("/Users/Alison/Documents/REPOS/2024-trends-abundance-paper/")
@@ -43,14 +47,14 @@ The R scripts included in the `code/` directory of this repository reproduce the
 
 The datasets required to run the above scripts should be located in a `data/` directory within the project. These are all available at a Dryad repository referenced in the published paper. They are primarily tabular data in either CSV or Parquet format (Parquet files can be read into R using the `arrow` R package), and there is a single GeoPackage containing spatial data. The datasets and associated columns are as follows
 
-**`trends-season-dates.csv`:** a list of all 495 species included in the study.
+**`trends-season-dates.csv`:** a list of all 495 species included in the study. This file is located in the Dryad component of the archived materials. The columns of the data table are:
 - `species_code`: 6-letter eBird species code.
 - `common_name`: English common name.
 - `breeding_biome`: breeding biome of the species.
 - `season`: season for which the trend was estimated.
 - `start_date/end_date`: dates defining the season boundaries in `MM-DD` format.
 
-**`ebird-trends_2007-2021.parquet`:** trends estimates for all species 27 km resolution for the 2007-2021 time period. In addition to the trends, a set of species-specific simulation-based metrics capturing the ability of the model to correctly classify trends is included. These metrics are estimated across a suite of simulation scenarios for each grid cell grouped into bins according to trend magnitude.
+**`ebird-trends_2007-2021.parquet`:** trends estimates for all species 27 km resolution for the 2007-2021 time period. In addition to the trends, a set of species-specific simulation-based metrics capturing the ability of the model to correctly classify trends is included. These metrics are estimated across a suite of simulation scenarios for each grid cell grouped into bins according to trend magnitude. This file is located in the Zenodo component of the archived materials. The columns of the data table are:
 - `species_code`: 6-letter eBird species code.
 - `season`: season for which the trend was estimated.
 - `breeding_biome/breeding_biome_label`: breeding biome of species.
@@ -65,7 +69,7 @@ The datasets required to run the above scripts should be located in a `data/` di
 - `directional_error_nz`: simulation based estimate of the proportion of non-zero trends estimates that incorrectly classify the trend direction.
 - `bin_{min/max}`: trend magnitude bin boundaries over which the error and power metrics are estimated.
 
-**`ebird-trends_abd-binned-performance_2021.parquet`:** simulation-based power and error estimates for each species, grouped by relative abundances binned using ten equally spaced quantiles.
+**`ebird-trends_abd-binned-performance_2021.parquet`:** simulation-based power and error estimates for each species, grouped by relative abundances binned using ten equally spaced quantiles. This file is located in the Zenodo component of the archived materials. The columns of the data table are:
 - `species_code`: 6-letter eBird species code.
 - `season`: season for which the trend was estimated.
 - `abd_bin_midpoint`: mid-point of the relative abundance bin.
@@ -76,7 +80,7 @@ The datasets required to run the above scripts should be located in a `data/` di
 - `directional_power_nz`: proportion of non-zero trends that correctly classify the trend direction.
 - `directional_error_nz`: proportion of non-zero trends that incorrectly classify the trend direction.
 
-**`ebird-trends_ppy-binned-performance_2021.parquet`:** simulation-based power and error estimates for each species, grouped into half percent trend magnitude bins.
+**`ebird-trends_ppy-binned-performance_2021.parquet`:** simulation-based power and error estimates for each species, grouped into half percent trend magnitude bins. This file is located in the Zenodo component of the archived materials. The columns of the data table are:
 - `species_code`: 6-letter eBird species code.
 - `season`: season for which the trend was estimated.
 - `ppy_bin_midpoint`: mid-point of the trend magnitude bins.
@@ -87,7 +91,7 @@ The datasets required to run the above scripts should be located in a `data/` di
 - `directional_power_nz`: proportion of non-zero trends that correctly classify the trend direction.
 - `directional_error_nz`: proportion of non-zero trends that incorrectly classify the trend direction.
 
-**`ebird-trends_range-wide_folds_2021.parquet`:** range-wide trend estimates for each of the 100 folds that make up the ensemble.
+**`ebird-trends_range-wide_folds_2021.parquet`:** range-wide trend estimates for each of the 100 folds that make up the ensemble. This file is located in the Zenodo component of the archived materials. The columns of the data table are:
 - `species_code`: 6-letter eBird species code.
 - `season`: season for which the trend was estimated.
 - `breeding_biome`: breeding biome of species.
@@ -96,7 +100,7 @@ The datasets required to run the above scripts should be located in a `data/` di
 - `abd_ppy`: abundance-weighted mean rangewide percent per year trend.
 - `prop_decline_range`: proportion of 27 km cells with declining trends within range.
 
-**`ebird-trends_simulations_focal-species_2021.parquet`:** simulation results for a subset of four species: Hermit Thrush, Hooded Warbler, Redhead, and Snow Goose.
+**`ebird-trends_simulations_focal-species_2021.parquet`:** simulation results for a subset of four species: Hermit Thrush, Hooded Warbler, Redhead, and Snow Goose. This file is located in the Zenodo component of the archived materials. The columns of the data table are:
 - `species_code`: 6-letter eBird species code.
 - `season`: season for which the trend was estimated.
 - `scenario_id`: unique integer ID for each simulation scenario (1-10).
@@ -108,12 +112,12 @@ The datasets required to run the above scripts should be located in a `data/` di
 - `upper`: 90th percentile of model estimated trends.
 - `nonzero`: whether the confidence intervals overlap zero.
 
-**`bcr-srd-lookup.parquet`:** lookup table identifying which Bird Conservation Region (BCR) each 27 km grid cell falls into.
+**`bcr-srd-lookup.parquet`:** lookup table identifying which Bird Conservation Region (BCR) each 27 km grid cell falls into. This file is located in the Dryad component of the archived materials. The columns of the data table are:
 - `region_code`: unique ID for each BCR.
 - `srd_id`: unique integer ID for each 27 km grid cell.
 - `coverage_fraction`: proprtion of the 27 km grid cell covered by the BCR.
 
-**`basemap.gpkg`:** spatial data for creating basemaps in the mapping scripts. All data come from the [Natural Earth](https://www.naturalearthdata.com/) project. Layers included are:
+**`basemap.gpkg`:** spatial data for creating basemaps in the mapping scripts. All data come from the [Natural Earth](https://www.naturalearthdata.com/) project. This file is located in the Dryad component of the archived materials. This file is located in the Zenodo component of the archived materials. Layers included are:
 - `land`: land boundary polygon.
 - `country_lines`: country boundary lines.
 - `state_lines`: state boundary lines.s
