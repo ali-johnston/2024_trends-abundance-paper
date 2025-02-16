@@ -1,5 +1,9 @@
 This repository contains code and data for _North American bird declines are greatest where species are most abundant_ (Johnston et al. 2025).
 
+## Abstract
+
+Efforts to address declines of North American birds have been constrained by limited availability of fine-scale information about population change. This archive accompanies a paper that describes the use of data from the participatory science project eBird to estimate continental population change and relative abundance at 27 km resolution for 495 bird species from 2007-2021. The archived materials, divided across Dryad and Zenodo, are composed of all data and R code that are necessary to conduct the analyses and produce the figures from this paper. The README.md file for this archive, which is part of the Dryad component of the archive, describes each of the R scripts and data files contained within the archive.
+
 ## Setup
 
 To install all necessary packages to run the R scripts in the `code/` directory, run the following
@@ -20,12 +24,12 @@ The R scripts included in the `code/` directory of this repository reproduce the
 
 - `figure-01_species-maps.R`: generates trend maps for Great Blue Heron, Wood Duck, and House Wren aggregated to three different spatial scales: range-wide, regional (Bird Conservation Region), and landscape scales (27 km × 27 km grid cells).
 - `figure-02_fishbone.R`: generates a bar plot showing the minimum, maximum, median, and interquartile range of 27 km trend estimates for each of the 495 species in the study.
-- `bam_linear_analysis.R`: This runs the linear models for each species relating trend to abundance. It uses the 'bam' function in mgcv to include a Gaussian Process to account for spatial autocorrelation. The code in here automatically searches through candidate scales of the spatial correlation and selects an optimal one to use for a final model. See the paper for further details. This script generates a set of CSVs that are required by several of the subsequent scripts, therefore, it should be run prior to running the scripts used to generate Figures 3 and S14-S16.
-- `figure-03_bam-abd.R`: Ali to provide a brief description of what this script does. Depends on `bam_linear_analysis.R`.
+- `bam_linear_analysis.R`: This runs the linear models for each species relating trend to abundance. It uses the `bam` function in mgcv to include a Gaussian Process to account for spatial autocorrelation. The code in here automatically searches through candidate scales of the spatial correlation and selects an optimal one to use for a final model. See the paper for further details. This script generates a set of CSVs that are required by several of the subsequent scripts, therefore, it should be run prior to running the scripts used to generate Figures 3 and S14-S16.
+- `figure-03_bam-abd.R`: this script visualizes the results of the BAM analysis from `bam_linear_analysis.R`, including a histogram of the distribution of slopes of the trend vs. abundance relationship, estimated linear relationships between trend and abundance for each species grouped by breeding biome, and example scatterplots of trend vs. abundance for Baltimore Oriole and Rufous Hummingbird. Depends on `bam_linear_analysis.R`.
 - `figure-04_community-maps.R`: generates community-level trend maps showing the mean trend across species breeding in six different biomes.
 - `figure-S01_variation-within-biome.R`: generates a histogram showing the distribution of the range of 27 km trend estimates within each BCR-species combination.
-- `figure-S02_trend-vs-prop-range-dec.R`: calculates the range-wide trend and proportion of 27 km grid cells that show a declining trend, then generates a boxplot showing the distribution of the proportion of declining cells binned by range-wide trend. TODO: missing the red box.
-- `figure-S03-S04_density-prop-range-dec.R`: generates density plots showing the distribution of range-wide trend and the distribution of the proportion of cells with declining trends. Density plots are grouped by biome and (in Figure S4) split by breeding and non-breeding season trends.
+- `figure-S02_trend-vs-prop-range-dec.R`: calculates range-wide trends and proportion of 27 km grid cells that show a declining trend, then generates a boxplot showing the distribution of the proportion of declining cells binned by range-wide trend.
+- `figure-S03-S04_density-prop-range-dec.R`: generates density plots showing the distribution of range-wide trends and the distribution of the proportion of cells with declining trends. Density plots are grouped by biome and (in Figure S4) split by breeding and non-breeding season trends.
 - `figure-S09-S10_power-error.R`: generate plots showing the power and error versus trend magnitude (S9) and relative abundance (S10) for a set of 4 example species  Hermit Thrush, Hooded Warbler, Redhead, and Snow Goose.
 - `figure-S11_power-error_all-species.R`: generates plots showing the power and error versus both the trend magnitude and relative abundance for all species.
 - `figure-S12_power-error-histogram.R`: generates a histogram showing, for different levels of trend magnitude, what proportion of non-zero 27 km trends have directions that are correctly and incorrectly classified, respectively.
