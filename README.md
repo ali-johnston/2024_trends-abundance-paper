@@ -2,11 +2,7 @@ This repository contains code and data for _North American bird declines are gre
 
 ## Abstract
 
-Efforts to address declines of North American birds have been constrained by limited availability of fine-scale information about population change. This archive accompanies a paper that describes the use of data from the participatory science project eBird to estimate continental population change and relative abundance at 27 km resolution for 495 bird species from 2007-2021. The archived materials, divided across Dryad and Zenodo, are composed of all data and R code that are necessary to conduct the analyses and produce the figures from this paper. The README.md file for this archive, which is part of the Dryad component of the archive, describes each of the R scripts and data files contained within the archive.
-
-## Content
-
-The full archive is split between Dryad and Zenodo, with the archive containing data split between Dryad and Zenodo; the Zenodo components of the data cannot be archived in Dryad because they inherit open-access non-CC-0 licenses that are not allowed in Dryad archives. All computer code as also archive in Zenodo. In order to use the combined data and code, one must download the Dryad and Zenodo components and place them in the same directory. R must be installed on this computer, with RStudio being optionally. This read-me file first provides additional details about setting up a computer to run the archived code, followed by descriptions of the purposes of all of the R scripts, and finally a list of all of the data files that includes a description of the contents of each data file.
+Efforts to address declines of North American birds have been constrained by limited availability of fine-scale information about population change. This archive accompanies a paper that describes the use of data from the participatory science project eBird to estimate continental population change and relative abundance at 27 km resolution for 495 bird species from 2007-2021. The archived materials, divided across Dryad and Zenodo, are composed of all data and R code that are necessary to conduct the analyses and produce the figures from this paper. This README.md describes each of the R scripts and data files contained within the archive.
 
 ## Setup
 
@@ -45,7 +41,12 @@ The R scripts included in the `code/` directory of this repository reproduce the
 
 ## Data
 
-The datasets required to run the above scripts should be located in a `data/` directory within the project. These are all available at a Dryad repository referenced in the published paper. They are primarily tabular data in either CSV or Parquet format (Parquet files can be read into R using the `arrow` R package), and there is a single GeoPackage containing spatial data. The datasets and associated columns are as follows
+The datasets required to run the above scripts are archived in Dryad and Zenodo at the following URLS:
+
+- Dryad: https://doi.org/10.5061/dryad.5qfttdzhq
+- Zenodo: https://doi.org/10.5281/zenodo.14883965
+
+All data files from these two archives should be downloaded and moved to a `data/` sub-directory within the project directory (where "project directory" is the directory containing this README). They datasets are primarily tabular data in either CSV or Parquet format (Parquet files can be read into R using the `arrow` R package), and there is a single GeoPackage containing spatial data. The datasets and associated columns are as follows
 
 **`trends-season-dates.csv`:** a list of all 495 species included in the study. This file is located in the Dryad component of the archived materials. The columns of the data table are:
 - `species_code`: 6-letter eBird species code.
@@ -120,6 +121,6 @@ The datasets required to run the above scripts should be located in a `data/` di
 **`basemap.gpkg`:** spatial data for creating basemaps in the mapping scripts. All data come from the [Natural Earth](https://www.naturalearthdata.com/) project. This file is located in the Dryad component of the archived materials. This file is located in the Zenodo component of the archived materials. Layers included are:
 - `land`: land boundary polygon.
 - `country_lines`: country boundary lines.
-- `state_lines`: state boundary lines.s
+- `state_lines`: state boundary lines.
 - `lakes`: lake polygons.
 - `global_bb`: global boundary polygon.
